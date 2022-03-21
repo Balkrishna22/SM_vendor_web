@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+ul {
+    list-style: none;
+
+}
+
+ul li::before {
+    content: "";
+    background-image: url(https://upload.wikimedia.org/wikipedia/commons/c/c6/Sign-check-icon.png);
+    background-size: contain;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    position: relative;
+    top: 0.1rem;
+    margin-right: 0.2rem;
+}
+
+p, ul {
+    line-height: 2rem;
+}
+
+.logotext {
+    font-family: 'Elsie Swash Caps', cursive;
+    color: #01448B;
+    font-weight: initial;
+}
+
+.policyHolder {
+    padding: 4rem 0 2rem;
+    border-bottom: 1px solid #ddd;
+}
