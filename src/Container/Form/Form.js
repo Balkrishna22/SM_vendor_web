@@ -28,28 +28,22 @@ const FormSection = (props) => {
   });
 
   const [, forceUpdate] = useState("");
-  console.log("userDetails--->", userDetails);
-
-  let history = useHistory();
 
   const validator = useRef(
     new SimpleReactValidator({ autoForceUpdate: { forceUpdate: forceUpdate } })
   );
 
-  const handleFormSubmit = () => {
-    let userType = userDetails.credential;
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
 
     const formValid = validator.current.allValid();
     if (formValid) {
       authServices.enquiryForm(userDetails).then((res) => {
         if (res.status === true) {
-          // Storage.set("auth", JSON.stringify(res.data));
           if (res.data.profile_completed) {
-            Storage.set("auth", JSON.stringify(res.data));
-            window.location.href = "http://localhost:3000";
+            toast.success(res.message);
           } else {
-            Storage.set("auth", JSON.stringify(res.data));
-            window.location.href = "/complete-profile";
+            toast.success(res.message);
           }
         } else {
           toast.error(res.message);
@@ -59,21 +53,6 @@ const FormSection = (props) => {
       validator.current.showMessages();
     }
   };
-
-  // const scrollCounter = document.querySelector('.js-scroll-counter');
-
-  // window.addEventListener('scroll', function() {
-  // scrollCounter.innerHTML = window.pageYOffset;
-  // });
-
-  // AOS.init({
-  //     offset: 200,
-  //     duration: 800,
-  //     easing: 'ease-in-out-sine',
-  //     delay: 200,
-  //     mirror: true
-  //   });
-
   return (
     <>
       <div className="container-fluid from-c">
@@ -85,17 +64,17 @@ const FormSection = (props) => {
                 <img src={FormImage} className="img-fluid form-img" />
 
                 <div className="form-icon">
-                  <RiFacebookFill className="icon" />
-                  <RiInstagramFill className="icon" />
-                  <RiTwitterFill className="icon" />
-                  <RiLinkedinFill className="icon" />
-                  <FaQuora className="icon" style={{ fontSize: 35 }} />
+                  <a href="https://www.facebook.com/theshadimasters" target="_blank"><RiFacebookFill className="icon" /></a>
+                  <a href="https://www.instagram.com/shadimasters/" target="_blank"><RiInstagramFill className="icon" /></a>
+                  <a href="https://twitter.com/ShadiMasters" target="_blank"><RiTwitterFill className="icon" /></a>
+                  <a href="https://www.linkedin.com/authwall?trk=gf&trkInfo=AQH7H7EVynWugwAAAX-10O545tOTGv0nZ4HKvED0Shg9NbwAdikFnVzkd9-QV1JOghTb0lYUkqlISRBWoXLfafXetZGjIwv7YJC6-lG_xK7JjY7vzrjESBQItmwA3bhNBOtXSSo=&originalReferer=https://shadimasters.com/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fshadimasters%2F" target="_blank"><RiLinkedinFill className="icon" /></a>
+                  <a href="https://www.quora.com/profile/Shadi-Masters" target="_blank"><FaQuora className="icon" style={{ fontSize: 35 }} /></a>
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-sm-12 ">
                 <h2 className="form-text">Quick Contact</h2>
 
-                <form action="/action_page.php">
+                <form onSubmit={(e) => handleFormSubmit(e)}>
                   <div className="row">
                     <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
                       <input
@@ -117,7 +96,7 @@ const FormSection = (props) => {
                       {validator.current.message(
                         "first_name",
                         userDetails.first_name,
-                        "required",
+                        "required|max:60",
                         { className: "text-danger" }
                       )}
                     </div>
@@ -141,7 +120,7 @@ const FormSection = (props) => {
                       {validator.current.message(
                         "last_name",
                         userDetails.last_name,
-                        "required",
+                        "required|max:60",
                         { className: "text-danger" }
                       )}
                     </div>
@@ -167,7 +146,7 @@ const FormSection = (props) => {
                       {validator.current.message(
                         "vendor_email",
                         userDetails.vendor_email,
-                        "required",
+                        "required|email",
                         { className: "text-danger" }
                       )}
                     </div>
@@ -217,7 +196,7 @@ const FormSection = (props) => {
                       {validator.current.message(
                         "first_name",
                         userDetails.business_name,
-                        "required",
+                        "required|max:60",
                         { className: "text-danger" }
                       )}
                     </div>
@@ -264,15 +243,14 @@ const FormSection = (props) => {
                       {validator.current.message(
                         "message",
                         userDetails.message,
-                        "required",
+                        "required|max:250",
                         { className: "text-danger" }
                       )}
                     </div>
                   </div>
 
                   <button
-                    type="button"
-                    onClick={(e) => handleFormSubmit(e)}
+                    type="submit"
                     className=" form-btn"
                   >
                     Submit

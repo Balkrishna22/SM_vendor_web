@@ -1,7 +1,11 @@
-import React from "react"
+
+import React, { useState } from "react";
 import Featurebannerimg3 from "../../Assests/Images/Featurebannerimg3.png"
+import { SignupModal } from "../../Includes/Modal/SignupModal";
 
 const Featurebanner = () => {
+
+  const [show, setShow] = useState(false)
 
   return (
     <>
@@ -13,7 +17,14 @@ const Featurebanner = () => {
               <p className="mt-3">
                 Get onboard, Get Promoted, Get Connected and nourish your wedding business with ShadiMasters.
               </p>
-              <button type="button" className=" header-btn" >
+              {/* <button type="button" className=" header-btn" >
+                SIGN UP
+              </button> */}
+              <button
+                type="button"
+                className=" header-btn ml-2"
+                onClick={() => setShow(true)}
+              >
                 SIGN UP
               </button>
             </div>
@@ -23,6 +34,10 @@ const Featurebanner = () => {
           </div>
         </div>
       </div>
+      <SignupModal
+        closeHandle={setShow}
+        openModal={show}
+      />
     </>
   );
 };
