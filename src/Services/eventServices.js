@@ -27,7 +27,7 @@ const eventService = {
   },
   get_services: async (data) => {
     return DataService.get(
-      "/api/static/list-services?business_type=" + data.business_type
+      "/api/static/list-services", data
     );
   },
   get_cities: async () => {
