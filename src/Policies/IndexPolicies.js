@@ -7,14 +7,24 @@ import TermsAndConditions from './TermsAndConditions';
 import Eula from './Eula';
 import './policyStyle.css'
 import { Nav } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
+
 export default function IndexPolicies() {
+    let history = useHistory();
+    const goToPreviousPath = () => {
+        history.goBack()
+    }
+
     return (
         <>
             <div className=" container-fluid">
-                <Nav className='border-bottom w-100 text-center  bg-white position-sticky' style={{ top: 0, zIndex: 1, padding: '0rem 4.5rem' }}
+                <Nav className='border-bottom w-100 text-center align-items-center bg-white position-sticky' style={{ top: 0, zIndex: 1, padding: '0rem 4.5rem' }}
                     activeKey="/home"
                 // onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
                 >
+                    <Nav.Item>
+                        <button className='btn btn-danger' onClick={goToPreviousPath}>Go Back</button>
+                    </Nav.Item>
                     <Nav.Item>
                         <Nav.Link className='py-3 text-dark fw-bold' href="#CookiePolicy">Cookie Policy</Nav.Link>
                     </Nav.Item>
