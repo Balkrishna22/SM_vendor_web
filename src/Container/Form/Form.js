@@ -28,28 +28,22 @@ const FormSection = (props) => {
   });
 
   const [, forceUpdate] = useState("");
-  console.log("userDetails--->", userDetails);
-
-  let history = useHistory();
 
   const validator = useRef(
     new SimpleReactValidator({ autoForceUpdate: { forceUpdate: forceUpdate } })
   );
 
-  const handleFormSubmit = () => {
-    let userType = userDetails.credential;
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
 
     const formValid = validator.current.allValid();
     if (formValid) {
       authServices.enquiryForm(userDetails).then((res) => {
         if (res.status === true) {
-          // Storage.set("auth", JSON.stringify(res.data));
           if (res.data.profile_completed) {
-            Storage.set("auth", JSON.stringify(res.data));
-            window.location.href = "http://localhost:3000";
+            toast.success(res.message);
           } else {
-            Storage.set("auth", JSON.stringify(res.data));
-            window.location.href = "/complete-profile";
+            toast.success(res.message);
           }
         } else {
           toast.error(res.message);
@@ -59,21 +53,6 @@ const FormSection = (props) => {
       validator.current.showMessages();
     }
   };
-
-  // const scrollCounter = document.querySelector('.js-scroll-counter');
-
-  // window.addEventListener('scroll', function() {
-  // scrollCounter.innerHTML = window.pageYOffset;
-  // });
-
-  // AOS.init({
-  //     offset: 200,
-  //     duration: 800,
-  //     easing: 'ease-in-out-sine',
-  //     delay: 200,
-  //     mirror: true
-  //   });
-
   return (
     <>
       <div className="container-fluid from-c">
@@ -95,7 +74,7 @@ const FormSection = (props) => {
               <div className="col-lg-6 col-md-6 col-sm-12 ">
                 <h2 className="form-text">Quick Contact</h2>
 
-                <form action="/action_page.php">
+                <form onSubmit={(e) => handleFormSubmit(e)}>
                   <div className="row">
                     <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
                       <input
@@ -117,7 +96,7 @@ const FormSection = (props) => {
                       {validator.current.message(
                         "first_name",
                         userDetails.first_name,
-                        "required",
+                        "required|max:60",
                         { className: "text-danger" }
                       )}
                     </div>
@@ -141,7 +120,7 @@ const FormSection = (props) => {
                       {validator.current.message(
                         "last_name",
                         userDetails.last_name,
-                        "required",
+                        "required|max:60",
                         { className: "text-danger" }
                       )}
                     </div>
@@ -167,7 +146,7 @@ const FormSection = (props) => {
                       {validator.current.message(
                         "vendor_email",
                         userDetails.vendor_email,
-                        "required",
+                        "required|email",
                         { className: "text-danger" }
                       )}
                     </div>
@@ -217,7 +196,7 @@ const FormSection = (props) => {
                       {validator.current.message(
                         "first_name",
                         userDetails.business_name,
-                        "required",
+                        "required|max:60",
                         { className: "text-danger" }
                       )}
                     </div>
@@ -264,15 +243,14 @@ const FormSection = (props) => {
                       {validator.current.message(
                         "message",
                         userDetails.message,
-                        "required",
+                        "required|max:250",
                         { className: "text-danger" }
                       )}
                     </div>
                   </div>
 
                   <button
-                    type="button"
-                    onClick={(e) => handleFormSubmit(e)}
+                    type="submit"
                     className=" form-btn"
                   >
                     Submit
