@@ -334,6 +334,36 @@ h4, h5 {
 .text-muteds{
     color: #555555 !important;
 }
+.M-f-ul{
+    display: flex;  
+    flex-wrap: wrap;
+    list-style-type: none !important;
+    justify-content: center;
+}
+.M-head ul li::before{
+    display: none;
+}
+.M-head hr{
+    border-color: #01448B;
+    margin-top: 0px;
+}
+.M-f-ul li{
+    padding: 0px 10px;
+    background-color: #01448B;
+    border-radius: 5px;
+    transition: 0.5s;
+    width: fit-content;
+    margin-right: 10px !important;
+    margin-bottom: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(172, 128, 234, 0.15));
+    font-size: 15px;
+    color: white;
+}
+.M-f-ul li:hover{
+    background-color: transparent;
+    border: 1px solid  #01448B;
+    color:  #01448B;
+}
 
 .M-contain li {
     padding: 5px 10px;
@@ -346,6 +376,7 @@ h4, h5 {
     filter: drop-shadow(0px 4px 4px rgba(172, 128, 234, 0.15));
     font-size: 15px;
     color: white;
+    
 }
 
 .M-contain {
