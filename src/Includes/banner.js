@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { GiCheckMark } from "react-icons/gi";
 import Modal from "react-bootstrap/Modal";
 import SimpleReactValidator from "simple-react-validator";
-
 import authServices from "../Services/authServices";
 import { useHistory, Link } from "react-router-dom";
 import Storage from "../Storage/Storage";

@@ -85,11 +85,11 @@ const FormSection = (props) => {
                 <img src={FormImage} className="img-fluid form-img" />
 
                 <div className="form-icon">
-                  <RiFacebookFill className="icon" />
-                  <RiInstagramFill className="icon" />
-                  <RiTwitterFill className="icon" />
-                  <RiLinkedinFill className="icon" />
-                  <FaQuora className="icon" style={{ fontSize: 35 }} />
+                  <a href="https://www.facebook.com/theshadimasters" target="_blank"><RiFacebookFill className="icon" /></a>
+                  <a href="https://www.instagram.com/shadimasters/" target="_blank"><RiInstagramFill className="icon" /></a>
+                  <a href="https://twitter.com/ShadiMasters" target="_blank"><RiTwitterFill className="icon" /></a>
+                  <a href="https://www.linkedin.com/authwall?trk=gf&trkInfo=AQH7H7EVynWugwAAAX-10O545tOTGv0nZ4HKvED0Shg9NbwAdikFnVzkd9-QV1JOghTb0lYUkqlISRBWoXLfafXetZGjIwv7YJC6-lG_xK7JjY7vzrjESBQItmwA3bhNBOtXSSo=&originalReferer=https://shadimasters.com/&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Fshadimasters%2F" target="_blank"><RiLinkedinFill className="icon" /></a>
+                  <a href="https://www.quora.com/profile/Shadi-Masters" target="_blank"><FaQuora className="icon" style={{ fontSize: 35 }} /></a>
                 </div>
               </div>
               <div className="col-lg-6 col-md-6 col-sm-12 ">
