@@ -678,6 +678,10 @@ p {
     display: flex;
     text-align: center;
     justify-content: center;
+    align-items: center;
+}
+.Eimg-box img{
+    width: 55px;height: 55px;
 }
 
 .card {
