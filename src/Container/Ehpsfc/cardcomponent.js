@@ -1,4 +1,4 @@
-import betterposition from "../../Assests/Images/betterposition.svg";
+
 
 const Cardcomp = ({ Cardata }) => {
   return (
