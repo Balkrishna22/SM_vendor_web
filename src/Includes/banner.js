@@ -6,6 +6,9 @@ const REACT_APP_API_REDIRECT_URL = process.env.REACT_APP_API_REDIRECT_URL;
 const Banner = () => {
 
   const [show, setShow] = useState(false);
+  const handelClose = () =>{
+    setShow(false)
+  }
 
   return (
 
@@ -53,7 +56,7 @@ const Banner = () => {
       </div>
 
       <SignupModal
-        closeHandle={setShow}
+        closeHandle={handelClose}
         openModal={show}
       />
 

@@ -48,7 +48,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
 
   const handleFormSubmit = () => {
     const formValid = validator.current.allValid();
-    if (formValid) {
+    // if (formValid) {
       let postData = {
         ...userDetails,
         business_type: userDetails.business_type.value,
@@ -59,21 +59,23 @@ export const SignupModal = ({ closeHandle, openModal }) => {
           if (res.data.profile_completed) {
             Storage.set("auth", JSON.stringify(res.data));
             toast.success("vendor will redirect to vendor admin for login");
+            closeHandle(false)
             // window.location.href = "/http://localhost:3000";
           } else {
             Storage.set("auth", JSON.stringify(res.data));
             toast.success(
               "vendor will redirect to vendor admin for Complete Profile"
             );
+            closeHandle(false)
             // window.location.href = "/complete-profile";
           }
         } else {
           toast.error(res.message);
         }
       });
-    } else {
-      validator.current.showMessages();
-    }
+    // } else {
+    //   validator.current.showMessages();
+    // }
   };
 
   useEffect(() => {
@@ -189,12 +191,14 @@ export const SignupModal = ({ closeHandle, openModal }) => {
         if (res.data.profile_completed) {
           Storage.set("auth", JSON.stringify(res.data));
           toast.success("vendor will redirect to vendor admin for login");
+          closeHandle(false)
           // window.location.href = "/http://localhost:3000";
         } else {
           Storage.set("auth", JSON.stringify(res.data));
           toast.success(
             "vendor will redirect to vendor admin for Complete Profile"
           );
+          closeHandle(false)
           // window.location.href = "/complete-profile";
         }
       } else {
