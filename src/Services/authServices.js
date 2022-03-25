@@ -20,6 +20,9 @@ const authServices = {
   register: async (data) => {
     return DataService.post("/api/vendor/vendor-registration", data);
   },
+  register_market: async (data) => {
+    return DataService.post("/api/market/register-market-vendor", data);
+  },
   enquiryForm: async (data) => {
     return DataService.post("/api/vendor/vendor-promotion", data);
   },

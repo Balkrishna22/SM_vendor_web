@@ -25,10 +25,11 @@ const eventService = {
   get_business: async (data) => {
     return DataService.get("/api/static/list-businesses", data);
   },
+  get_market_business: async (data) => {
+    return DataService.get("/api/user/list-all-market-business", data);
+  },
   get_services: async (data) => {
-    return DataService.get(
-      "/api/static/list-services", data
-    );
+    return DataService.get("/api/static/list-services", data);
   },
   get_cities: async () => {
     return DataService.get("/api/static/list-cities");

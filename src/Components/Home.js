@@ -14,7 +14,7 @@ export default function Home() {
       {/* header-complete */}
       <Getstarted animation="flip-down"/>
 
-      <ShadiVendor/>
+      <ShadiVendor animation="fade-up"/>
 
       {/* box-Get-found-complete */}
       <GYB animation="fade-up"/>
