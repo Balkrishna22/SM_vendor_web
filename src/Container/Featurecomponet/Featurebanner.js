@@ -22,7 +22,7 @@ const Featurebanner = () => {
               </button> */}
               <button
                 type="button"
-                className=" header-btn ml-2"
+                className=" header-btn "
                 onClick={() => setShow(true)}
               >
                 SIGN UP

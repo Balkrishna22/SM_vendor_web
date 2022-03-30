@@ -10,32 +10,32 @@ const slides = [
   {
     title: 'Vendor Branding',
     img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    info: 'Showing up your Business online is quite easy but listing them and convert into successful Brand takes lots of efforts.To make your Business up in marketing, Shadimasters bring its exclusive Branding services helps you to glitter your Business Profile among Customer-Region.'
   },
   {
     title: 'Personalized Webpage',
     img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    info: 'Shadimasters give specific passage for Vendors to show up their Business and services in a more sophisticated way to Users. By this feature for the Vendor, the vendor freely circulate the Best of Best to the audience.'
   },
   {
     title: 'Enquiry Management',
     img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    info: 'We also offer free Enquiry management tools for the Vendor, with help of this tools you can create and manage Enquiry in more buttery way. Now hustling and messing up in Management of your Business Enquiry is completely stoppable with ShadiMasters..'
   },
   {
     title: 'Reviews',
     img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    info: 'Reviews are like the Guide to Choose only Good. By showing up the Reviews on the Work, Vendors can enjoy more chances of organic leads from ShadiMasters Users.'
   },
   {
     title: 'Event Management',
     img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    info: 'Enjoy a hustle free Event by checking our Event Management Tool. Here, Vendor can club out all the important entries needed to deliver best of best in the services.'
   },
   {
     title: 'Growth Statistics',
     img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    info: 'A well designed data representation of Data to visualise the Business growth.'
   }
 ]
 

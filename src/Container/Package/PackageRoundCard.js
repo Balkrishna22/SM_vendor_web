@@ -41,7 +41,8 @@ const PackageCardComponent = ({abcd} ) =>{
                             </p>
                             <hr className="hr" />
                         
-                            <button type="button" className="">Learn More</button>
+                            {/* <button type="button" className="">Learn More</button> */}
+                            
 
                     </div>
                 </div>

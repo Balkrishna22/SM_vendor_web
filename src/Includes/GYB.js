@@ -76,7 +76,7 @@ const GYB = (props) =>{
                         </div>
                     </div>
 
-                    <div className="row G-b-icon-r">
+                    <div className="row G-b-icon-r g-b-1024">
                         <div className="col-lg-3 col-md-3 col-sm-12">
                             <img src={statistic} className="G-searchimg" />
                         </div>
@@ -84,10 +84,13 @@ const GYB = (props) =>{
                             <h5>Growth Statistics </h5>
                         </div>
                     </div>
-                    <button type="button" className="GYB-btn">LEARN MORE</button>
+                    {/* <button type="button" className="GYB-btn">LEARN MORE</button> */}
                 </div>
-                <div className="col-lg-8 col-md-8 col-sm-12 gyb-img-box">
+                <div className="col-lg-8 col-md-8 col-sm-12 ">
+                    <div className="gyb-img-box">
                     <img src={GYBimage}  className="GYBimage img-fluid" />
+                    </div>
+                   
                 </div>
 
                 

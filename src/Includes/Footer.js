@@ -25,34 +25,33 @@ export default function Footer() {
               </p>
             </div>
           </div>
-          <div className="col-lg-3 col-md-3 col-sm-12 Quick">
+          <div className="col-lg-4 col-md-4 col-sm-12 Quick">
             <h5 className="footer-h5">Quick Links</h5>
             <p className="Quick-p">Home</p>
-            <p>About</p>
-            <p>Bookings</p>
-            <p>Play My Wedding</p>
-            <p>Vendors</p>
-            <p>Blog</p>
+            <p>Feature</p>
+            <p>Quick Contact</p>
+            <p>Know your Best Subscription Plan</p>
+            
           </div>
-          <div className="col-lg-2 col-md-2 col-sm-12 Quick">
-            <h5 className="footer-h5">Planning Tools</h5>
-            <p className="Quick-p">Wedding Website</p>
-            <p>Wedding Invitations</p>
-            <p>Checklist</p>
-            <p>Guest List</p>
-            <p>Budgets</p>
-            <p>Vendor Managers</p>
+          <div className="col-lg-4 col-md-4 col-sm-12 Quick">
+            <h5 className="footer-h5">ShadiMasters Exclusive :</h5>
+            <p className="Quick-p">Management tool</p>
+            <p>Business Branding</p>
+            <p>Listing Business</p>
+            <p>Statistical Reports</p>
+            {/* <p>Budgets</p>
+            <p>Vendor Managers</p> */}
           </div>
-          <div className="col-lg-3 col-md-3 col-sm-12 Quick">
+          {/* <div className="col-lg-3 col-md-3 col-sm-12 Quick">
             <p className="f-last-p">Seating Chart</p>
             <p>Hotel Blocks</p>
             <p>Cost Guide</p>
             <p>Help</p>
-          </div>
+          </div> */}
 
           <div className="col-12">
             <hr className="mt-5" />
-            <p className="text-center">©2022 ShadiMaesters</p>
+            <p className="text-center">©2022 ShadiMasters</p>
           </div>
         </div>
       </div>
