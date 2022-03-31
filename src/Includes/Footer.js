@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../Assests/Images/logo.svg";
+// import {Link} from "react-router-dom"
 
 export default function Footer() {
   return (
@@ -10,7 +11,7 @@ export default function Footer() {
             <hr className="mb-5" />
           </div>
 
-          <div className="col-lg-4 col-md-4 col-sm-12">
+          <div className="col-lg-5 col-md-5 col-sm-12">
             <div className="about-section">
               <h5 className="footer-h5">About</h5>
               {/* <img src={logo} className="img-fluid footerlogo"/> */}
@@ -27,14 +28,14 @@ export default function Footer() {
           </div>
           <div className="col-lg-4 col-md-4 col-sm-12 Quick">
             <h5 className="footer-h5">Quick Links</h5>
-            <p className="Quick-p">Home</p>
+            <p className="Quick-p" to="/">Home</p>
             <p>Feature</p>
             <p>Quick Contact</p>
             <p>Know your Best Subscription Plan</p>
             
           </div>
-          <div className="col-lg-4 col-md-4 col-sm-12 Quick">
-            <h5 className="footer-h5">ShadiMasters Exclusive :</h5>
+          <div className="col-lg-3 col-md-3 col-sm-12 Quick">
+            <h5 className="footer-h5">ShadiMasters Exclusive </h5>
             <p className="Quick-p">Management tool</p>
             <p>Business Branding</p>
             <p>Listing Business</p>

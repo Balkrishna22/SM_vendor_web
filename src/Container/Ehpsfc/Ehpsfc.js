@@ -1,7 +1,10 @@
 
 import Cardcomp from "./cardcomponent"
 import Carddata from "./carddata"
+import {useHistory} from "react-router-dom"
 const Ehpsfc = () => {
+
+    const history = useHistory()  
 
 return(
 
@@ -30,7 +33,7 @@ return(
               );
             })} 
            <div className="col-12 mt-4 Ebtn-box">
-           <button type="button" className="Ebtn m-auto ">Many More?</button>
+           <button type="button" className="Ebtn m-auto " onClick={() => history.push("/feature")}>Many More?</button>
            </div>
         
         </div>

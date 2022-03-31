@@ -8,6 +8,7 @@ import Eula from './Eula';
 import './policyStyle.css'
 import { Nav } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import {FaTimes} from "react-icons/fa"
 
 export default function IndexPolicies() {
     let history = useHistory();
@@ -22,9 +23,9 @@ export default function IndexPolicies() {
                     activeKey="/home"
                 // onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
                 >
-                    <Nav.Item>
+                    {/* <Nav.Item>
                         <button className='btn btn-danger' onClick={goToPreviousPath}>Go Back</button>
-                    </Nav.Item>
+                    </Nav.Item> */}
                     <Nav.Item>
                         <Nav.Link className='py-3 text-dark fw-bold' href="#CookiePolicy">Cookie Policy</Nav.Link>
                     </Nav.Item>
@@ -42,6 +43,9 @@ export default function IndexPolicies() {
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link className='py-3 text-dark fw-bold' href="#Eula">Eula</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item className="ml-auto">
+                        <button className=' btn-policies' onClick={goToPreviousPath}><FaTimes/></button>
                     </Nav.Item>
 
                 </Nav>

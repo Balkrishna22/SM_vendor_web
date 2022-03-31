@@ -5,16 +5,20 @@ import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 import { Row, Col } from 'react-bootstrap';
+import Frame2 from "../../Assests/Images/Frame2.png"
+import detail from "../../Assests/Images/detail.png"
+import Frame3 from "../../Assests/Images/Frame3.png"
+import growth3 from "../../Assests/Images/growth3.png"
 
 const slides = [
   {
     title: 'Vendor Branding',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
+    img: Frame2,
     info: 'Showing up your Business online is quite easy but listing them and convert into successful Brand takes lots of efforts.To make your Business up in marketing, Shadimasters bring its exclusive Branding services helps you to glitter your Business Profile among Customer-Region.'
   },
   {
     title: 'Personalized Webpage',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
+    img:  detail,
     info: 'Shadimasters give specific passage for Vendors to show up their Business and services in a more sophisticated way to Users. By this feature for the Vendor, the vendor freely circulate the Best of Best to the audience.'
   },
   {
@@ -24,7 +28,7 @@ const slides = [
   },
   {
     title: 'Reviews',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
+    img: Frame3,
     info: 'Reviews are like the Guide to Choose only Good. By showing up the Reviews on the Work, Vendors can enjoy more chances of organic leads from ShadiMasters Users.'
   },
   {
@@ -34,7 +38,7 @@ const slides = [
   },
   {
     title: 'Growth Statistics',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
+    img: growth3,
     info: 'A well designed data representation of Data to visualise the Business growth.'
   }
 ]
@@ -121,7 +125,8 @@ export default function Sliders() {
                 slides && slides.map((item, i) => {
                   return (
                     <div className="customSlide" key={i}>
-                      <img src={item.img} alt='img' />
+                      <div></div>
+                      <img src={item.img} alt='img' className="img-fluid" />
                       <div className='slideInfo'><b>{item.title}</b> {item.info}</div>
                     </div>
                   )

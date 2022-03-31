@@ -995,6 +995,13 @@ p {
     margin-bottom: 0px;
     margin-top: 10px;
 }
+.Quick p:hover{
+    color: #01448B;
+}
+.userhead{
+    margin-top: 11px;
+}
+
 
 .Quick-p {
     padding-top: 15px;
@@ -1002,6 +1009,17 @@ p {
 
 .f-last-p {
     padding-top: 35px;
+}
+.btn-policies{
+    background-color: #01448B;
+    padding: 3px 8px;
+    color: white;
+    border: 1px solid  #01448B;
+    border-radius: 5px;
+}
+.btn-policies:hover{
+    background-color: transparent;
+    color: black;
 }
 
 /* feature page css */
@@ -1617,7 +1635,7 @@ p {
         padding: 100px 0;
     }
     .slider-r {
-        padding: 10px 130px 0px 130px !important;
+        padding: 10px 110px 0px 110px !important;
     }
     .header-btn{
         padding: 10px 15px;
