@@ -7,6 +7,7 @@ import PackageCard from "../Container/Package/PackageCard"
 import FormSection from "../Container/Form/Form"
 import Appbanner from "../Container/App-template/App-button"
 import ShadiVendor from"../Container/Shadimasters/Shadi"
+import MultipleItems from "../Container/Featurecomponet/Sliders"
 export default function Home() {
   return (
     <>
@@ -17,9 +18,11 @@ export default function Home() {
       <ShadiVendor animation="fade-up"/>
 
       {/* box-Get-found-complete */}
-      <GYB animation="fade-up"/>
+
+      {/* <GYB animation="fade-up"/> */}
+      <MultipleItems animation="fade-up"/>
       {/* GBS-complete */}
-      <Ehpsfc />
+      <Ehpsfc animation="fade-up"/>
 
       <PackageCard animation="fade-up"/>
 

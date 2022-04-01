@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../Assests/Images/logo.svg";
 // import {Link} from "react-router-dom"
 
@@ -22,8 +23,9 @@ export default function Footer() {
                 vendors of your city with ShadiMasters. Our expert team is
                 equipped with years of experience in wedding planning &
                 management. Get in touch with us for any wedding related
-                enquiry.{" "}
+                enquiry.
               </p>
+              <Link as={Link} className="footer-link" to="/policies">Terms & Condition</Link>
             </div>
           </div>
           <div className="col-lg-4 col-md-4 col-sm-12 Quick">
@@ -52,7 +54,7 @@ export default function Footer() {
 
           <div className="col-12">
             <hr className="mt-5" />
-            <p className="text-center">©2022 ShadiMasters</p>
+            <p className="text-center m-0">©2022 ShadiMasters</p>
           </div>
         </div>
       </div>

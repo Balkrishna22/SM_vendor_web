@@ -11,7 +11,7 @@ const Getstarted = () => {
       <div className="row Guides-r">
         <div className="col-lg-3 col-md-3 col-sm-12">
           <div className="Guides-box">
-            <h5>Guides with ShadiMasters</h5>
+            <h5>ShadiMasters for Vendor</h5>
             <h5 className="G-h5-c2">
               GET STARTED <BsChevronRight />
             </h5>

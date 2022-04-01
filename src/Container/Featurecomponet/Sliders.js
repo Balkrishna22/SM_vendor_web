@@ -9,6 +9,11 @@ import Frame2 from "../../Assests/Images/Frame2.png"
 import detail from "../../Assests/Images/detail.png"
 import Frame3 from "../../Assests/Images/Frame3.png"
 import growth3 from "../../Assests/Images/growth3.png"
+import get from '../../Assests/Images/get.png'
+import pdashboard from '../../Assests/Images/pdashboard.png'
+
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const slides = [
   {
@@ -22,9 +27,9 @@ const slides = [
     info: 'Shadimasters give specific passage for Vendors to show up their Business and services in a more sophisticated way to Users. By this feature for the Vendor, the vendor freely circulate the Best of Best to the audience.'
   },
   {
-    title: 'Enquiry Management',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'We also offer free Enquiry management tools for the Vendor, with help of this tools you can create and manage Enquiry in more buttery way. Now hustling and messing up in Management of your Business Enquiry is completely stoppable with ShadiMasters..'
+    title: 'Get Business',
+    img: get,
+    info: 'ShadiMasters is dedicated to promote and share business opportunity with only handful wedding vendors. If you provide quality services get connected with us in order to get potential business leads. '
   },
   {
     title: 'Reviews',
@@ -32,9 +37,9 @@ const slides = [
     info: 'Reviews are like the Guide to Choose only Good. By showing up the Reviews on the Work, Vendors can enjoy more chances of organic leads from ShadiMasters Users.'
   },
   {
-    title: 'Event Management',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Enjoy a hustle free Event by checking our Event Management Tool. Here, Vendor can club out all the important entries needed to deliver best of best in the services.'
+    title: 'Personalised Dashboard',
+    img: pdashboard,
+    info: 'ShadiMasters offer personalised dashboard to manage your day to day activity and statistics. You can also bring your direct enquires and manage them with the enquiry management system.'
   },
   {
     title: 'Growth Statistics',
@@ -60,7 +65,7 @@ function SamplePrevArrow(props) {
 }
 
 
-export default function Sliders() {
+export default function Sliders(props) {
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
 
@@ -93,9 +98,13 @@ export default function Sliders() {
     setGetWidth(widthRef.current.clientWidth);
   }, []);
 
+  useEffect(function () {
+    Aos.init({ duration: 1000 });
+  }, []);
+
   return (
     <>
-      <div className="container-fluid slider-r ">
+      <div className="container-fluid slider-r " data-aos={props.animation}>
         <Row>
           <Col lg={3}>
             <Slider {...slider2}

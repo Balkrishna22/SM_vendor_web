@@ -105,6 +105,21 @@ transform: scale(.7);
 }
 
 */
+
+
+.modal-header .close{
+    margin: -1rem -1rem -1rem -1rem !important;
+}
+.model-heading{
+    margin: auto;
+    color: #01448B;
+}
+.footer-link{
+    font-size: 15px;
+    color: #555555;
+    font-weight: 500;
+    cursor: pointer;
+}
 .Prow-r p{
     color: grey;
     font-size: 15px;
@@ -248,13 +263,15 @@ transform: scale(.7);
 }
 
 .slider2 .slick-next {
-    top: 200px;
+    top: 220px;
     right: 20%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .slider2 .slick-prev {
-    top: 200px;
+    top: 220px;
     left: 20%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .slider1 .slick-track, .slider2 .slick-track {
@@ -577,7 +594,7 @@ p {
 
 /* Guides-css */
 .Guides-r {
-    padding: 60px 100px;
+    padding: 50px 100px 30px 100px;
 }
 
 .Guides-box {
@@ -792,7 +809,7 @@ p {
 
 .P-hr {
     margin: auto;
-    border: 1px solid #ffffff;
+    border: 1px solid grey;
 }
 
 .Pcard {
@@ -999,8 +1016,15 @@ p {
     color: #01448B;
 }
 .userhead{
-    margin-top: 11px;
+    margin-top: 8px;
+    text-decoration: none !important;
+    /* border-bottom: none !important; */
+    color: #DB438E !important;
 }
+.userhead svg{
+    margin-top: -4px;
+}
+
 
 
 .Quick-p {
@@ -1042,7 +1066,8 @@ p {
 }
 
 .slider-r {
-    padding: 50px 130px 0px 130px !important;
+    padding: 50px 130px 60px 130px !important;
+    background-color: #DDE7F1;
 }
 
 .slick-next, .slick-prev {
@@ -1266,7 +1291,7 @@ p {
         margin-bottom: -33px;
     }
     .slider-r {
-        padding: 50px 10px 0px 10px !important;
+        padding: 40px 10px 65px 10px !important;
     }
     .slick-slide.slick-active.slick-current .sidebarNav:after {
         right: 160px;
@@ -1347,7 +1372,7 @@ p {
     }
 
     .Guides-r {
-        padding: 60px 5px;
+        padding: 50px 5px 30px 5px;
     }
 
     .Guides-box2 {
@@ -1363,7 +1388,7 @@ p {
     }
 
     .Grow-r2 {
-        padding: 0px 0 0px 0 !important;
+        padding: 0px 0 40px 0 !important;
         text-align: center;
     }
 
@@ -1443,7 +1468,7 @@ p {
     /* feture */
 
     .slider-r {
-        padding: 10px 10px 0px 20px !important;
+        padding: 0px 10px 90px 20px !important;
     }
     /* .slick-slide .sidebarNav:after{
         top: 40px;
@@ -1491,7 +1516,7 @@ p {
     }
 
     .Guides-r {
-        padding: 60px 5px;
+        padding: 50px 15px 30px 15px;
     }
 
     .G-h5-c2 {
@@ -1504,7 +1529,7 @@ p {
     }
 
     .Grow-r2 {
-        padding: 30px 5px 0px 5px !important;
+        padding: 30px 5px 35px 5px !important;
     }
 
     .Prow-r2 {
@@ -1562,7 +1587,7 @@ p {
         font-size: 12px;
     }
     .card {
-        height: 370px;
+        height: 365px;
     }
     .g-b-1024{
         margin-bottom: 30px;
@@ -1572,17 +1597,25 @@ p {
     }
 
 }
+@media only screen and (min-width: 869px) {
+    .card {
+        height: 315px;
+    }
+}
 
 @media only screen and (min-width: 1024px) {
 
     .Apptext {
         padding: 40px 0px;
     }
+    .card {
+        height: 315px;
+    }
     .Guides-box{
         height: 130px;
     }
     .Grow-r2 {
-    padding: 30px 5px 0px 5px !important;
+    padding: 30px 5px 35px 5px !important;
     }
     .g-b-1024{
         margin-bottom: 40px;
@@ -1597,7 +1630,7 @@ p {
     }
 
     .slider-r {
-        padding: 10px 25px 0px 25px !important;
+        padding: 10px 25px 65px 25px !important;
     }
     .header-btn{
         padding: 10px 15px;
@@ -1635,7 +1668,7 @@ p {
         padding: 100px 0;
     }
     .slider-r {
-        padding: 10px 110px 0px 110px !important;
+        padding: 10px 110px 60px 110px !important;
     }
     .header-btn{
         padding: 10px 15px;
@@ -1660,7 +1693,9 @@ p {
 
     /* feature-end */
 
-
+    .float-right {
+        float: center!important;
+    }
 
     .navbar {
         padding: 8px 100px !important;
@@ -1683,7 +1718,7 @@ p {
     }
 
     .Grow-r2 {
-        padding: 0px 100px 20px 100px !important;
+        padding: 0px 100px 40px 100px !important;
     }
 
     .Prow-r2 {
@@ -1734,7 +1769,7 @@ p {
     }
 
     .Guides-r {
-        padding: 60px 100px;
+        padding: 50px 100px 30px 100px;
     }
 
     .G-h5-c2 {
