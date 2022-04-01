@@ -1,12 +1,24 @@
 
 import Cardcomp from "./cardcomponent"
 import Carddata from "./carddata"
-const Ehpsfc = () => {
+import {useHistory} from "react-router-dom"
+import Aos from "aos";
+import "aos/dist/aos.css";
+import React, { useEffect } from "react";
 
+
+const Ehpsfc = (props) => {
+
+    const history = useHistory()  
+
+    useEffect(function () {
+        Aos.init({ duration: 1000 });
+      }, []);
+    
 return(
 
     <>
-    <div className=" container-fluid">
+    <div className=" container-fluid " data-aos={props.animation}>
         <div className="row Erow-r ">
             <div className="col-12">
                 <h2>Your Industry Experience will not be wasted</h2>
@@ -29,9 +41,9 @@ return(
                 </div>
               );
             })} 
-           <div className="col-12 mt-4 Ebtn-box">
-           <button type="button" className="Ebtn m-auto ">Many More?</button>
-           </div>
+           {/* <div className="col-12 mt-4 Ebtn-box">
+           <button type="button" className="Ebtn m-auto " onClick={() => history.push("/feature")}>Many More?</button>
+           </div> */}
         
         </div>
     </div>

@@ -5,37 +5,46 @@ import Slider from "react-slick";
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 
 import { Row, Col } from 'react-bootstrap';
+import Frame2 from "../../Assests/Images/Frame2.png"
+import detail from "../../Assests/Images/detail.png"
+import Frame3 from "../../Assests/Images/Frame3.png"
+import growth3 from "../../Assests/Images/growth3.png"
+import get from '../../Assests/Images/get.png'
+import pdashboard from '../../Assests/Images/pdashboard.png'
+
+import Aos from "aos";
+import "aos/dist/aos.css";
 
 const slides = [
   {
     title: 'Vendor Branding',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    img: Frame2,
+    info: 'Showing up your Business online is quite easy but listing them and convert into successful Brand takes lots of efforts.To make your Business up in marketing, Shadimasters bring its exclusive Branding services helps you to glitter your Business Profile among Customer-Region.'
   },
   {
     title: 'Personalized Webpage',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    img:  detail,
+    info: 'Shadimasters give specific passage for Vendors to show up their Business and services in a more sophisticated way to Users. By this feature for the Vendor, the vendor freely circulate the Best of Best to the audience.'
   },
   {
-    title: 'Enquiry Management',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    title: 'Get Business',
+    img: get,
+    info: 'ShadiMasters is dedicated to promote and share business opportunity with only handful wedding vendors. If you provide quality services get connected with us in order to get potential business leads. '
   },
   {
     title: 'Reviews',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    img: Frame3,
+    info: 'Reviews are like the Guide to Choose only Good. By showing up the Reviews on the Work, Vendors can enjoy more chances of organic leads from ShadiMasters Users.'
   },
   {
-    title: 'Event Management',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    title: 'Personalised Dashboard',
+    img: pdashboard,
+    info: 'ShadiMasters offer personalised dashboard to manage your day to day activity and statistics. You can also bring your direct enquires and manage them with the enquiry management system.'
   },
   {
     title: 'Growth Statistics',
-    img: 'https://media-cdn.tripadvisor.com/media/photo-s/15/a4/9b/77/legacy-hotel-at-img-academy.jpg',
-    info: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec maximus orci velit, at condimentum magna commodo non. Fusce dapibus nec quam et sodales. Mauris massa arcu, accumsan sit amet aliquet vel, lacinia in lorem.'
+    img: growth3,
+    info: 'A well designed data representation of Data to visualise the Business growth.'
   }
 ]
 
@@ -56,7 +65,7 @@ function SamplePrevArrow(props) {
 }
 
 
-export default function Sliders() {
+export default function Sliders(props) {
   const [nav1, setNav1] = useState();
   const [nav2, setNav2] = useState();
 
@@ -89,9 +98,13 @@ export default function Sliders() {
     setGetWidth(widthRef.current.clientWidth);
   }, []);
 
+  useEffect(function () {
+    Aos.init({ duration: 1000 });
+  }, []);
+
   return (
     <>
-      <div className="container-fluid slider-r ">
+      <div className="container-fluid slider-r " data-aos={props.animation}>
         <Row>
           <Col lg={3}>
             <Slider {...slider2}
@@ -121,7 +134,8 @@ export default function Sliders() {
                 slides && slides.map((item, i) => {
                   return (
                     <div className="customSlide" key={i}>
-                      <img src={item.img} alt='img' />
+                      <div></div>
+                      <img src={item.img} alt='img' className="img-fluid" />
                       <div className='slideInfo'><b>{item.title}</b> {item.info}</div>
                     </div>
                   )

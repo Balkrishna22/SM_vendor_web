@@ -42,6 +42,7 @@ const PackageCard = (props) =>{
                
 
             </div>
+            <p className="text-center mt-1">To know the best suitable package for you, send your enquiry via <br /><b style={{color:"#01448B"}}>Quick Enquiry.</b></p>
 
             </div>
 

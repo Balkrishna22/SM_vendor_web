@@ -19,7 +19,7 @@ const ShadiVendor = (props) => {
         data-aos={props.animation}
       >
         <div className="row px-lg-5 px-3 ">
-          <div className="col-md-12 mb-4 text-center">
+          {/* <div className="col-md-12 mb-4 text-center">
             <h2 className="whySmheading">ShadiMasters for Vendor</h2>
             <hr className="w-25 E-hr" />
           </div>
@@ -42,7 +42,7 @@ const ShadiVendor = (props) => {
                 <h5 className="my-4 fw-bold">Make Revenues</h5>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="col-lg-12 mx-auto px-lg-5 px-3 text-center d-flex flex-column">
             <p className="text-muteds lh-lg flex-grow-1">
               <span className="logotext">ShadiMasters</span> ranks very highly

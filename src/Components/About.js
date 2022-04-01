@@ -45,7 +45,7 @@ export default function About() {
         <div>
             <Featurebanner/>
 
-            <MultipleItems/>
+            {/* <MultipleItems/> */}
             
             {/* <FeatureD/> */}
             
