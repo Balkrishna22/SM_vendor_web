@@ -106,6 +106,26 @@ transform: scale(.7);
 
 */
 
+
+.modal-header .close{
+    margin: -1rem -1rem -1rem -1rem !important;
+}
+.model-heading{
+    margin: auto;
+    color: #01448B;
+}
+.footer-link{
+    font-size: 15px;
+    color: #555555;
+    font-weight: 500;
+    cursor: pointer;
+}
+.Prow-r p{
+    color: grey;
+    font-size: 15px;
+    margin: 0px;
+}
+
 .slider2 .slick-slide {
     transition: all .3s;
 }
@@ -243,13 +263,15 @@ transform: scale(.7);
 }
 
 .slider2 .slick-next {
-    top: 200px;
+    top: 220px;
     right: 20%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .slider2 .slick-prev {
-    top: 200px;
+    top: 220px;
     left: 20%;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
 }
 
 .slider1 .slick-track, .slider2 .slick-track {
@@ -358,10 +380,10 @@ h4, h5 {
     filter: drop-shadow(0px 4px 4px rgba(172, 128, 234, 0.15));
     font-size: 15px;
     color: white;
+    border: 1px solid  #01448B;
 }
 .M-f-ul li:hover{
     background-color: transparent;
-    border: 1px solid  #01448B;
     color:  #01448B;
 }
 
@@ -572,7 +594,7 @@ p {
 
 /* Guides-css */
 .Guides-r {
-    padding: 60px 100px;
+    padding: 50px 100px 30px 100px;
 }
 
 .Guides-box {
@@ -580,6 +602,7 @@ p {
     box-shadow: 0px 0px 4px rgba(25, 93, 164, 0.25);
     border-radius: 5px;
     padding: 15px;
+    /* height: 130px; */
 }
 
 .G-h5-c2 {
@@ -610,7 +633,7 @@ p {
 }
 
 .Grow-r {
-    padding: 60px 100px;
+    padding: 50px 100px;
 }
 
 .Grow-r2 {
@@ -646,11 +669,11 @@ p {
     width: 100%;
     height: 75% !important;
     transition: 2s;
+    margin-bottom: 50px;
 }
 
 .gyb-img-box {
     overflow: hidden;
-
 }
 
 .GYBimage:hover {
@@ -690,7 +713,7 @@ p {
 
 .Erow-r {
     text-align: center;
-    padding: 60px 100px 20px 100px;
+    padding: 50px 100px 20px 100px;
 }
 
 .Erow-r h2 {
@@ -759,7 +782,7 @@ p {
 /* package */
 
 .Prow-r {
-    padding: 60px 100px;
+    padding: 50px 100px;
     background: linear-gradient(0deg, rgba(25, 93, 164, 0.15), rgba(25, 93, 164, 0.15));
 
 }
@@ -786,7 +809,7 @@ p {
 
 .P-hr {
     margin: auto;
-    border: 1px solid #ffffff;
+    border: 1px solid grey;
 }
 
 .Pcard {
@@ -850,7 +873,7 @@ p {
 /* PACKAGE-COMPLET */
 
 .from-c {
-    padding: 60px 80px;
+    padding: 50px 80px;
 }
 
 .form-r {
@@ -958,7 +981,7 @@ p {
 
 /* footer */
 .footer-row {
-    padding: 60px 100px;
+    padding: 50px 100px;
 }
 
 .footer-row hr {
@@ -989,6 +1012,20 @@ p {
     margin-bottom: 0px;
     margin-top: 10px;
 }
+.Quick p:hover{
+    color: #01448B;
+}
+.userhead{
+    margin-top: 8px;
+    text-decoration: none !important;
+    /* border-bottom: none !important; */
+    color: #DB438E !important;
+}
+.userhead svg{
+    margin-top: -4px;
+}
+
+
 
 .Quick-p {
     padding-top: 15px;
@@ -996,6 +1033,17 @@ p {
 
 .f-last-p {
     padding-top: 35px;
+}
+.btn-policies{
+    background-color: #01448B;
+    padding: 3px 8px;
+    color: white;
+    border: 1px solid  #01448B;
+    border-radius: 5px;
+}
+.btn-policies:hover{
+    background-color: transparent;
+    color: black;
 }
 
 /* feature page css */
@@ -1018,7 +1066,8 @@ p {
 }
 
 .slider-r {
-    padding: 50px 130px !important;
+    padding: 50px 130px 60px 130px !important;
+    background-color: #DDE7F1;
 }
 
 .slick-next, .slick-prev {
@@ -1225,8 +1274,67 @@ p {
 
 /* Media query */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 767px) {
+    /* feature-start */
 
+    .Feature-banner-contain {
+        padding: 1px 0;
+    }
+    .Feature-banner-back{
+        padding: 50px 10px 0px 10px !important;
+        text-align: center;
+    }
+    .header-btn{
+        margin-top: 0px;
+    }
+    .Featurebannerimg3 {
+        margin-bottom: -33px;
+    }
+    .slider-r {
+        padding: 40px 10px 65px 10px !important;
+    }
+    .slick-slide.slick-active.slick-current .sidebarNav:after {
+        right: 160px;
+        display: none;
+    }
+    .slick-slide .sidebarNav:after{
+        z-index: -1;
+        top: 18px;
+    }
+    .sidebarNav {
+        padding-right: 0px;
+        position: relative;
+    }
+    .slideInfo {
+        background: #fff;
+        padding: 5px;
+        position: absolute;
+        bottom: 0;
+        color: #565656;
+        display: none;
+        font-size: 9px;
+        top: 184px;
+    }
+    .slider2 .slick-prev {
+        top: 146px;
+        left: 24%;
+    }
+    .slider2 .slick-next {
+        top: 146px;
+        right: 24%;
+    }
+    .slick-next, .slick-prev {
+        width: 15px;
+        height: 15px;
+        z-index: 1;
+    }
+    .slider2 .customSlide, .slider2 .customSlide>img{
+        height: 299px;
+    }
+    .sliderWrapper{
+        height: 289px;
+    }
+    /* feature-end */
     .navbar {
         padding: 10px 15px !important;
     }
@@ -1254,9 +1362,17 @@ p {
     .header-btn {
         margin-bottom: 15px;
     }
+    .G-searchimg {
+        width: 100px;
+    }
+    .G-b-icon-r h5{
+        font-size: 20px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+    }
 
     .Guides-r {
-        padding: 60px 5px;
+        padding: 50px 5px 30px 5px;
     }
 
     .Guides-box2 {
@@ -1264,7 +1380,7 @@ p {
     }
 
     .Grow-r {
-        padding: 60px 5px;
+        padding: 50px 5px;
     }
 
     .Grow-r h2 {
@@ -1272,7 +1388,7 @@ p {
     }
 
     .Grow-r2 {
-        padding: 0px 0 30px 0 !important;
+        padding: 0px 0 40px 0 !important;
         text-align: center;
     }
 
@@ -1282,7 +1398,7 @@ p {
     }
 
     .Erow-r {
-        padding: 60px 5px 20px 5px;
+        padding: 50px 5px 20px 5px;
     }
 
     .Erow-r h2 {
@@ -1327,7 +1443,7 @@ p {
     }
 
     .footer-row {
-        padding: 60px 5px;
+        padding: 50px 5px;
     }
 
     .about-section p {
@@ -1348,6 +1464,39 @@ p {
 
 @media only screen and (min-width: 768px) {
 
+
+    /* feture */
+
+    .slider-r {
+        padding: 0px 10px 90px 20px !important;
+    }
+    /* .slick-slide .sidebarNav:after{
+        top: 40px;
+        z-index: -1;
+    } */
+    .slick-slide.slick-active.slick-current .sidebarNav:after{
+        display: none;
+    }
+    .slick-track{
+        padding-top: 30px;
+    }
+    .slideInfo{
+        font-size: 13px;
+    }
+    /* .sidebarNav{
+        padding-right: 0px;
+    } */
+    .Feature-banner-back{
+        padding: 15px 15px 0px 15px !important;
+    }
+    .Feature-banner-contain {
+        padding: 24px 0;
+    }
+    .Featurebannerimg3{
+        padding-top: 89px;
+    }
+
+    /* feature-end */
     .home-banner-back {
         padding: 50px 5px !important;
     }
@@ -1367,7 +1516,7 @@ p {
     }
 
     .Guides-r {
-        padding: 60px 5px;
+        padding: 50px 15px 30px 15px;
     }
 
     .G-h5-c2 {
@@ -1380,11 +1529,7 @@ p {
     }
 
     .Grow-r2 {
-        padding: 30px 5px 50px 5px !important;
-    }
-
-    .card {
-        height: 315px;
+        padding: 30px 5px 35px 5px !important;
     }
 
     .Prow-r2 {
@@ -1425,7 +1570,7 @@ p {
     }
 
     .footer-row {
-        padding: 60px 5px;
+        padding: 50px 5px;
     }
 
     .footer-h5 {
@@ -1441,7 +1586,21 @@ p {
     .Quick p {
         font-size: 12px;
     }
+    .card {
+        height: 365px;
+    }
+    .g-b-1024{
+        margin-bottom: 30px;
+    }
+    .Ebtn-box{
+        margin-bottom: 40px;
+    }
 
+}
+@media only screen and (min-width: 869px) {
+    .card {
+        height: 315px;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -1449,10 +1608,94 @@ p {
     .Apptext {
         padding: 40px 0px;
     }
+    .card {
+        height: 315px;
+    }
+    .Guides-box{
+        height: 130px;
+    }
+    .Grow-r2 {
+    padding: 30px 5px 35px 5px !important;
+    }
+    .g-b-1024{
+        margin-bottom: 40px;
+    }
+    /* feature */
+
+    .Featurebannerimg3 {
+        padding-top: 40px;
+    }
+    .Feature-banner-back{
+        padding: 50px 100px 0px 100px !important;
+    }
+
+    .slider-r {
+        padding: 10px 25px 65px 25px !important;
+    }
+    .header-btn{
+        padding: 10px 15px;
+    }
+    .slick-slide.slick-active.slick-current .sidebarNav:after {
+        right: 7px;
+        display: block;
+    }
+    .header-btn{
+        padding: 10px 5px;
+    }
+    .slick-slide .sidebarNav:after {
+        top: 27px;
+        z-index: 1;
+    }
+    .Feature-banner-back .header-btn{
+        padding: 10px 45px;
+    }
+    .home-banner-back .header-btn{
+        padding: 10px 45px;
+    }
+
+    /* feature-end */
 
 }
 
 @media only screen and (min-width: 1350px) {
+
+
+    /* feature */
+    .Featurebannerimg3 {
+        padding-top: 19px;
+    }
+    .Feature-banner-contain {
+        padding: 100px 0;
+    }
+    .slider-r {
+        padding: 10px 110px 60px 110px !important;
+    }
+    .header-btn{
+        padding: 10px 15px;
+    }
+    .slick-slide.slick-active.slick-current .sidebarNav:after {
+        right: 7px;
+        display: block;
+    }
+    .slick-slide .sidebarNav:after {
+        top: 27px;
+        z-index: 1;
+    }
+    .Feature-banner-back .header-btn{
+        padding: 10px 45px;
+    }
+    .slideInfo {
+        font-size: 15px;
+    }
+    .Feature-banner-back{
+        padding: 50px 100px 0px 100px !important;
+    }
+
+    /* feature-end */
+
+    .float-right {
+        float: center!important;
+    }
 
     .navbar {
         padding: 8px 100px !important;
@@ -1460,6 +1703,9 @@ p {
 
     .home-banner-back {
         padding: 50px 100px !important;
+    }
+    .home-banner-back .header-btn{
+            padding: 10px 45px; 
     }
 
     .home-banner-back h1 {
@@ -1472,7 +1718,7 @@ p {
     }
 
     .Grow-r2 {
-        padding: 0px 100px 0px 100px !important;
+        padding: 0px 100px 40px 100px !important;
     }
 
     .Prow-r2 {
@@ -1505,7 +1751,7 @@ p {
     }
 
     .footer-row {
-        padding: 60px 100px;
+        padding: 50px 100px;
     }
 
     .footer-h5 {
@@ -1523,7 +1769,7 @@ p {
     }
 
     .Guides-r {
-        padding: 60px 100px;
+        padding: 50px 100px 30px 100px;
     }
 
     .G-h5-c2 {
@@ -1554,6 +1800,9 @@ p {
 
     .G-h5-c2 svg {
         margin-top: -4px;
+    }
+    .Guides-box {
+        height: auto;
     }
 
 }

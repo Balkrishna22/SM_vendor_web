@@ -8,7 +8,7 @@ export default function Routes() {
   return (
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/feature" component={About} />
+      {/* <Route exact path="/feature" component={About} /> */}
       <Route exact path="/policies" component={IndexPolicies} />
 
       {/* <Route exact path="/Home" component={Home} />

@@ -14,15 +14,15 @@ const Banner = () => {
 
     <div className=" container-fluid">
       <div className="row home-banner-back">
-        <div className="col-lg-4 col-md-8 col-sm-12  ">
+        <div className="col-lg-4 col-md-4 col-sm-12  ">
 
         </div>
-        <div className="col-lg-8 col-md-6 col-sm-12 ">
+        <div className="col-lg-8 col-md-8 col-sm-12 ">
           <div className="float-right">
             <h1 className="">
               Be the King of your Business with ShadiMasters
             </h1>
-            <div className="ml-5">
+            <div className="">
               <p className="mt-3">
                 <GiCheckMark /> Roar Out loud and strengthen your digital
                 presence.
@@ -38,7 +38,7 @@ const Banner = () => {
             <a href={REACT_APP_API_REDIRECT_URL} target="_blank">
               <button
                 type="button"
-                className=" ml-5 header-btn"
+                className=" header-btn"
               // onClick={() => setShow(true)}
               >
                 SIGN IN

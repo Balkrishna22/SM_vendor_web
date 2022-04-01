@@ -217,6 +217,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
     >
       <Modal.Header closeButton>
         <Modal.Title id="example-custom-modal-styling-title"></Modal.Title>
+       <h2 className="model-heading">Select Business Type</h2>
       </Modal.Header>
       <Modal.Body>
         <div className="container-fluid">
@@ -473,9 +474,21 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                           { className: "text-danger" }
                         )}
                       </div>
+
+                      <div className="mb-4 col-6">
+                        <input type="password" class="form-control" id="pwd" placeholder="password" name="pswd" />
+                      </div>
                     </div>
+
+                    <div className="row">
+                      <div className="mb-4 col-6">
+                      <input type="password" class="form-control" id="pwd" placeholder="confirm-password" name="pswd" />
+                      </div>
+                    </div>
+                    
+
                     <p>
-                      By clicking the submit button below you are accepting{" "}
+                      By clicking the submit button below you are accepting
                       <Link to="/policies" className="m-term">
                         Terms and Conditions
                       </Link>
@@ -687,6 +700,19 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                       /> */}
                       </div>
                     </div>
+
+                    
+
+                    <div className="row">
+                      <div className="mb-4 col-6">
+                        <input type="password" class="form-control" id="pwd" placeholder="password" name="pswd" />
+                      </div>
+                    
+                      <div className="mb-4 col-6">
+                      <input type="password" class="form-control" id="pwd" placeholder="confirm-password" name="pswd" />
+                      </div>
+                    </div>
+
                     <p>
                       By clicking the submit button below you are accepting{" "}
                       <Link to="/policies" className="m-term">

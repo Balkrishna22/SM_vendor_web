@@ -26,7 +26,7 @@ const Appbanner = (props) =>{
                         <div className="Apptext">
                         <h2>SHADIMASTERS</h2>
                         <hr className="w-25"/>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque auctor et risus et venenatis. Etiam nec nunc sagittis, placerat nulla nec, tincidunt turpis. Nulla facilisi. Donec eget tellus </p>
+                        <p>Soon we are coming up with mobile apps for iOS & Android <br></br>users. </p>
                         <h5>DOWNLOAD NOW</h5>
                         <div className=" app-button">
                         <img src={Googleapp} className="img-fluid app1"/>
