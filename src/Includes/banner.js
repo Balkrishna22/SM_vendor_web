@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { GiCheckMark } from "react-icons/gi";
 import { SignupModal } from "./Modal/SignupModal";
 
@@ -6,7 +6,7 @@ const REACT_APP_API_REDIRECT_URL = process.env.REACT_APP_API_REDIRECT_URL;
 const Banner = () => {
 
   const [show, setShow] = useState(false);
-  const handelClose = () =>{
+  const handelClose = () => {
     setShow(false)
   }
 
@@ -58,6 +58,7 @@ const Banner = () => {
       <SignupModal
         closeHandle={handelClose}
         openModal={show}
+        setOpenModal={setShow}
       />
 
     </div>

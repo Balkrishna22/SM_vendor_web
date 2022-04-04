@@ -9,7 +9,7 @@ import { getCustomstyle } from "../../Services/helperConst";
 import eventService from "../../Services/eventServices";
 import authServices from "../../Services/authServices";
 
-export const SignupModal = ({ closeHandle, openModal }) => {
+export const SignupModal = ({ closeHandle, openModal, setOpenModal }) => {
     const [userDetails, setUserDetails] = useState({
         first_name: "",
         last_name: "",
@@ -71,10 +71,11 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                     vendor_state: userDetails.vendor_state?.value,
                     vendor_password: userDetails.vendor_password,
                     business_type: userDetails.business_type.value,
+                    surrounding_area: userDetails.surrounding_area
                 };
                 authServices.register(postData).then((res) => {
                     if (res.status === true) {
-                        // Storage.set("auth", JSON.stringify(res.data));
+
                         if (res.data.profile_completed) {
                             Storage.set("auth", JSON.stringify(res.data));
                             toast.success("vendor will redirect to vendor admin for login");
@@ -88,6 +89,22 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                             closeHandle(false)
                             // window.location.href = "/complete-profile";
                         }
+                        setVendorConfirm();
+                        setUserDetails({
+                            first_name: "",
+                            last_name: "",
+                            business_name: "",
+                            business_type: "",
+                            vendor_service: "",
+                            vendor_email: "",
+                            vendor_phone: "",
+                            vendor_city: "",
+                            vendor_state: "",
+                            vendor_password: "",
+                            surrounding_area: ""
+                        })
+                        getItemBusinessList();
+                        setFormType({ type: "" })
                     } else {
                         toast.error(res.message);
                     }
@@ -121,18 +138,18 @@ export const SignupModal = ({ closeHandle, openModal }) => {
             });
     };
 
-    useEffect(() => {
-        getCity();
-    }, [userDetails.vendor_state]);
+    // useEffect(() => {
+    //     getCity();
+    // }, [userDetails.vendor_state]);
 
     useEffect(() => {
         getServiceList();
     }, [userDetails.vendor_service]);
 
 
-    const getCity = () => {
+    const getCity = (value) => {
         let param = {
-            state: userDetails.vendor_state,
+            state: value,
         };
         eventService
             .get_city(param)
@@ -245,6 +262,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                 market_state: marketVendorDetails.market_state?.value,
                 market_vendor_password: marketVendorDetails.market_vendor_password,
                 market_business_type: marketVendorDetails.market_business_type.value,
+                surrounding_area: marketVendorDetails?.surrounding_area
             };
             if (formValid) {
                 authServices.register_market(postData).then((res) => {
@@ -253,16 +271,29 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                         if (res.data.profile_completed) {
                             Storage.set("auth", JSON.stringify(res.data));
                             toast.success("vendor will redirect to vendor admin for login");
-                            closeHandle(false)
-                            // window.location.href = "/http://localhost:3000";
+                            setOpenModal(false);
                         } else {
                             Storage.set("auth", JSON.stringify(res.data));
                             toast.success(
                                 "vendor will redirect to vendor admin for Complete Profile"
                             );
-                            closeHandle(false)
-                            // window.location.href = "/complete-profile";
+                            setOpenModal(false);
                         }
+                        setMarketConfirm();
+                        setMarketVendor({
+                            first_name: "",
+                            last_name: "",
+                            market_business_name: "",
+                            market_email: "",
+                            market_phone: "",
+                            market_city: "",
+                            market_state: "",
+                            market_business_type: "",
+                            market_vendor_password: "",
+                            surrounding_area: ""
+                        })
+                        setFormType({ type: "" })
+                        getItemMarketList();
                     } else {
                         toast.error(res.message);
                     }
@@ -271,15 +302,66 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                 validator2.current.showMessages();
             }
         }
-
-
     };
+
+    function closeHandle() {
+        setOpenModal(false);
+        setVendorConfirm();
+        setMarketConfirm();
+        setUserDetails({
+            first_name: "",
+            last_name: "",
+            business_name: "",
+            business_type: "",
+            vendor_service: "",
+            vendor_email: "",
+            vendor_phone: "",
+            vendor_city: "",
+            vendor_state: "",
+            vendor_password: "",
+            surrounding_area: ""
+        })
+        setMarketVendor({
+            first_name: "",
+            last_name: "",
+            market_business_name: "",
+            market_email: "",
+            market_phone: "",
+            market_city: "",
+            market_state: "",
+            market_business_type: "",
+            market_vendor_password: "",
+            surrounding_area: ""
+        })
+        setFormType({ type: "" })
+        getItemBusinessList();
+        getItemMarketList();
+    }
+
+    const productStateHandler = (e) => {
+        getCity(e.value)
+        setUserDetails({
+            ...userDetails,
+            vendor_state: e,
+            vendor_city: ""
+        })
+    }
+
+    const serviceStateHandler = (e) => {
+        getCity(e.value)
+        setMarketVendor({
+            ...marketVendorDetails,
+            market_state: e,
+            market_city: ""
+        })
+    }
+
 
     return (
         <Modal
             show={openModal}
             size="xl"
-            onHide={() => closeHandle(false)}
+            onHide={() => closeHandle()}
             dialogClassName="modal-100w"
             aria-labelledby="example-custom-modal-styling-title"
         >
@@ -296,7 +378,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                             <ul className="M-f-ul">
                                 {busineesList &&
                                     busineesList.map((elm, key) => (
-                                        <li className={elm.is_active === true ? "active-type" : ""} onClick={() => onSelect(elm, key)}>{elm.label}</li>
+                                        <li key={key} className={elm.is_active === true ? "active-type" : ""} onClick={() => onSelect(elm, key)}>{elm.label}</li>
                                     ))}
                             </ul>
                         </div>
@@ -306,7 +388,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                             <ul className="M-f-ul">
                                 {marketList &&
                                     marketList.map((elm, key) => (
-                                        <li className={elm.is_active === true ? "active-type" : ""} onClick={() => onChangeMarket(elm, key)}>{elm.label}</li>
+                                        <li key={key} className={elm.is_active === true ? "active-type" : ""} onClick={() => onChangeMarket(elm, key)}>{elm.label}</li>
                                     ))}
                             </ul>
                         </div>
@@ -319,7 +401,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                 <div className="M-form">
                                     <h4 className="M-f-heading">Service Vendor</h4>
                                     <hr></hr>
-                                    <form>
+                                    <form autocomplete="off" onSubmit={(e) => handleFormSubmit(e, "service")}>
                                         <div className="row">
                                             <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
                                                 <input
@@ -341,7 +423,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                 {validator1.current.message(
                                                     "first_name",
                                                     userDetails.first_name,
-                                                    "required|max:60",
+                                                    "required|alpha_space|max:60",
                                                     { className: "text-danger" }
                                                 )}
                                             </div>
@@ -365,7 +447,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                 {validator1.current.message(
                                                     "last_name",
                                                     userDetails.last_name,
-                                                    "required|max:60",
+                                                    "required|alpha_space|max:60",
                                                     { className: "text-danger" }
                                                 )}
                                             </div>
@@ -389,7 +471,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                     }
                                                 />
                                                 {validator1.current.message(
-                                                    "required|max:60",
+                                                    "Business Name",
                                                     userDetails.business_name,
                                                     "required",
                                                     { className: "text-danger" }
@@ -437,11 +519,12 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                             [e.target.name]: e.target.value,
                                                         })
                                                     }
+                                                    min="0"
                                                 />
                                                 {validator1.current.message(
                                                     "vendor_phone",
                                                     userDetails.vendor_phone,
-                                                    "required",
+                                                    "required|min:10",
                                                     { className: "text-danger" }
                                                 )}
                                             </div>
@@ -451,12 +534,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                     className="custmSelect_lt"
                                                     placeholder="Select state..."
                                                     options={allStates}
-                                                    onChange={(e) =>
-                                                        setUserDetails({
-                                                            ...userDetails,
-                                                            vendor_state: e,
-                                                        })
-                                                    }
+                                                    onChange={(e) => productStateHandler(e)}
                                                     value={userDetails.vendor_state}
                                                     styles={getCustomstyle(100)}
                                                 />
@@ -497,6 +575,33 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                     type="text"
                                                     className="form-control"
                                                     autoComplete="off"
+                                                    placeholder="Surrounding Area"
+                                                    name="business_type"
+                                                    value={userDetails.surrounding_area}
+                                                    onChange={(e) =>
+                                                        setUserDetails({
+                                                            ...userDetails,
+                                                            surrounding_area: e.target.value,
+                                                        })
+                                                    }
+                                                />
+                                                {validator1.current.message(
+                                                    "Area",
+                                                    userDetails.surrounding_area,
+                                                    "required",
+                                                    { className: "text-danger" }
+                                                )}
+                                            </div>
+
+                                        </div>
+                                        <div className="row">
+
+                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                {/* <select className="form-select form-control"> */}
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    autoComplete="off"
                                                     placeholder="business_type"
                                                     id="business_type"
                                                     aria-describedby="business_type"
@@ -504,24 +609,16 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                     value={userDetails.business_type.label}
                                                     readOnly
                                                 />
-
-                                                {/* <Select
-                                                    className="custmSelect_lt"
-                                                    placeholder="Select bussiness"
-                                                    styles={getCustomstyle(100)}
-                                                    onChange={(e) => onSelect(e)}
-                                                    options={busineesList}
-                                                /> */}
                                                 {validator1.current.message(
                                                     "Select bussiness",
                                                     userDetails.business_type,
                                                     "required",
                                                     { className: "text-danger" }
                                                 )}
+
                                             </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="mb-4 col-6">
+
+                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
                                                 <Select
                                                     className="custmSelect_lt"
                                                     placeholder="Select Services"
@@ -541,7 +638,9 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                     { className: "text-danger" }
                                                 )}
                                             </div>
+                                        </div>
 
+                                        <div className="row">
                                             <div className="mb-4 col-6">
                                                 <input type="password" class="form-control" id="pwd" placeholder="password" name="pswd"
                                                     onChange={(e) => setUserDetails({
@@ -556,9 +655,6 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                     { className: "text-danger" }
                                                 )}
                                             </div>
-                                        </div>
-
-                                        <div className="row">
                                             <div className="mb-4 col-6">
                                                 <input type="password" class="form-control" id="pwd" placeholder="confirm-password" name="pswd" onChange={(e) => setVendorConfirm(e.target.value)}
                                                 />
@@ -580,8 +676,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                         </p>
 
                                         <button
-                                            type="button"
-                                            onClick={(e) => handleFormSubmit(e, "service")}
+                                            type="submit"
                                             className=" Mform-btn"
                                         >
                                             Submit
@@ -592,13 +687,14 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                 <div className="M-form">
                                     <h4 className="M-f-heading">Market Vendor</h4>
                                     <hr></hr>
-                                    <form>
+                                    <form autoComplete="off" onSubmit={(e) => handleMarketSubmit(e, "product")}>
                                         <div className="row">
                                             <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    autoComplete="off"
+
+                                                    autocomplete="new-password"
                                                     placeholder="First Name"
                                                     id="fname"
                                                     aria-describedby="emailHelp"
@@ -614,7 +710,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                 {validator2.current.message(
                                                     "first_name",
                                                     marketVendorDetails.first_name,
-                                                    "required|max:60",
+                                                    "required|alpha_space|max:60",
                                                     { className: "text-danger" }
                                                 )}
                                             </div>
@@ -622,7 +718,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    autoComplete="off"
+                                                    autocomplete="new-password"
                                                     placeholder="Last Name"
                                                     id="fname"
                                                     aria-describedby="emailHelp"
@@ -638,7 +734,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                 {validator2.current.message(
                                                     "last_name",
                                                     marketVendorDetails.last_name,
-                                                    "required|max:60",
+                                                    "required|alpha_space|max:60",
                                                     { className: "text-danger" }
                                                 )}
                                             </div>
@@ -648,7 +744,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                 <input
                                                     type="text"
                                                     className="form-control"
-                                                    autoComplete="off"
+                                                    autocomplete="new-password"
                                                     placeholder="Business Name"
                                                     id="Business"
                                                     aria-describedby="emailHelp"
@@ -672,7 +768,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                 <input
                                                     type="email"
                                                     className="form-control"
-                                                    autoComplete="off"
+                                                    autocomplete="new-password"
                                                     placeholder="Email"
                                                     id="fname"
                                                     aria-describedby="emailHelp"
@@ -698,7 +794,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                 <input
                                                     type="number"
                                                     className="form-control"
-                                                    autoComplete="off"
+                                                    autocomplete="new-password"
                                                     placeholder="Phone"
                                                     id="Phone"
                                                     aria-describedby="emailHelp"
@@ -710,11 +806,12 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                             [e.target.name]: e.target.value,
                                                         })
                                                     }
+                                                    min="0"
                                                 />
                                                 {validator2.current.message(
                                                     "market_phone",
                                                     marketVendorDetails.market_phone,
-                                                    "required",
+                                                    "required|min:10",
                                                     { className: "text-danger" }
                                                 )}
                                             </div>
@@ -724,12 +821,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                     className="custmSelect_lt"
                                                     placeholder="Select state..."
                                                     options={allStates}
-                                                    onChange={(e) =>
-                                                        setMarketVendor({
-                                                            ...marketVendorDetails,
-                                                            market_state: e,
-                                                        })
-                                                    }
+                                                    onChange={(e) => serviceStateHandler(e)}
                                                     value={marketVendorDetails.market_state}
                                                     styles={getCustomstyle(100)}
                                                 />
@@ -742,7 +834,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                             </div>
                                         </div>
                                         <div className="row">
-                                            <div className="mb-4  col-lg-6 col-md-6 col-sm-12">
+                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
                                                 {/* <select className="form-select form-control"> */}
                                                 <Select
                                                     className="custmSelect_lt"
@@ -764,12 +856,43 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                     { className: "text-danger" }
                                                 )}
                                             </div>
+
                                             <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
                                                 {/* <select className="form-select form-control"> */}
                                                 <input
                                                     type="text"
                                                     className="form-control"
                                                     autoComplete="off"
+                                                    placeholder="Surrounding Area"
+                                                    name="business_type"
+                                                    value={marketVendorDetails.surrounding_area}
+                                                    onChange={(e) =>
+                                                        setMarketVendor({
+                                                            ...marketVendorDetails,
+                                                            surrounding_area: e.target.value,
+                                                        })
+                                                    }
+                                                />
+                                                {validator2.current.message(
+                                                    "Area",
+                                                    marketVendorDetails.surrounding_area,
+                                                    "required",
+                                                    { className: "text-danger" }
+                                                )}
+                                            </div>
+
+
+                                        </div>
+
+
+
+                                        <div className="row">
+                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                {/* <select className="form-select form-control"> */}
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    autocomplete="new-password"
                                                     placeholder="business_type"
                                                     id="business_type"
                                                     aria-describedby="business_type"
@@ -777,26 +900,14 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                                     value={marketVendorDetails.market_business_type.label}
                                                     disabled
                                                 />
-
-                                                {/* <Select
-                                                    className="custmSelect_lt"
-                                                    placeholder="Select bussiness"
-                                                    styles={getCustomstyle(100)}
-                                                    onChange={(e) => onSelect(e)}
-                                                    options={busineesList}
-                                                /> */}
                                             </div>
-                                        </div>
-
-
-
-                                        <div className="row">
                                             <div className="mb-4 col-6">
                                                 <input type="password" class="form-control" id="pwd" placeholder="password" name="pswd"
                                                     onChange={(e) => setMarketVendor({
                                                         ...marketVendorDetails,
                                                         market_vendor_password: e.target.value
                                                     })}
+                                                    autocomplete="new-password"
                                                 />
                                                 {validator2.current.message(
                                                     "Password",
@@ -808,7 +919,7 @@ export const SignupModal = ({ closeHandle, openModal }) => {
 
                                             <div className="mb-4 col-6">
                                                 <input type="password" class="form-control" id="pwd" placeholder="confirm-password" name="pswd" onChange={(e) => setMarketConfirm(e.target.value)}
-                                                />
+                                                    autocomplete="new-password" />
                                                 {validator2.current.message(
                                                     "Password",
                                                     marketConfirm,
@@ -819,15 +930,14 @@ export const SignupModal = ({ closeHandle, openModal }) => {
                                         </div>
 
                                         <p>
-                                            By clicking the submit button below you are accepting{" "}
+                                            By clicking the submit button below you are accepting
                                             <Link to="/policies" className="m-term">
-                                                Terms and Conditions
+                                                &nbsp; Terms and Conditions
                                             </Link>
                                         </p>
 
                                         <button
-                                            type="button"
-                                            onClick={(e) => handleMarketSubmit(e, "product")}
+                                            type="submit"
                                             className=" Mform-btn"
                                         >
                                             Submit
