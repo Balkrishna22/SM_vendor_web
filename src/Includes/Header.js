@@ -34,7 +34,7 @@ export const Header = () => {
             </Nav.Link> */}
               <a href="http://192.168.1.153:3000/home" target="blank" className="userhead "><RiUserLine /> Sign In</a>
 
-              <a javascriptVoid="" className="userhead " style={{ cursor: 'pointer' }} onClick={() => setShow(true)}> <RiUserAddLine /> Sign Up</a>
+              <a href="javascript:void(0)" className="userhead " style={{ cursor: 'pointer' }} onClick={() => setShow(true)}> <RiUserAddLine /> Sign Up</a>
 
               {/* <Nav.Link as={Link} to="" className="text-center"> */}
               <a href="https://shadimasters.com" target="blank" className="userhead "><RiUserShared2Line /> User Website</a>

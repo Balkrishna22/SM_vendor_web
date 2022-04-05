@@ -12,9 +12,11 @@ import "aos/dist/aos.css";
 import { toast } from "react-toastify";
 import SimpleReactValidator from "simple-react-validator";
 const FormSection = (props) => {
+
   useEffect(function () {
     Aos.init({ duration: 1000 });
   }, []);
+
   const [userDetails, setUserDetails] = useState({
     vendor_email: "",
     vendor_phone: "",
@@ -24,7 +26,7 @@ const FormSection = (props) => {
     business_age: "",
     message: "",
   });
-
+  const [hideValidation, setHideValidation] = useState(false)
   const [, forceUpdate] = useState("");
 
   const validator = useRef(
@@ -33,33 +35,27 @@ const FormSection = (props) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    setHideValidation(false)
     const formValid = validator.current.allValid();
-    if (formValid) {
+    if (formValid && !hideValidation) {
       authServices.enquiryForm(userDetails).then((res) => {
         if (res.status === true) {
           if (res.data.profile_completed) {
-            setUserDetails({
-              vendor_email: "",
-              vendor_phone: "",
-              first_name: "",
-              last_name: "",
-              business_name: "",
-              business_age: "",
-              message: "",
-            });
             toast.success(res.message);
+            setHideValidation(true)
           } else {
-            setUserDetails({
-              vendor_email: "",
-              vendor_phone: "",
-              first_name: "",
-              last_name: "",
-              business_name: "",
-              business_age: "",
-              message: "",
-            });
             toast.success(res.message);
+            setHideValidation(true)
           }
+          setUserDetails({
+            vendor_email: "",
+            vendor_phone: "",
+            first_name: "",
+            last_name: "",
+            business_name: "",
+            business_age: "",
+            message: "",
+          });
         } else {
           toast.error(res.message);
         }
@@ -68,6 +64,18 @@ const FormSection = (props) => {
       validator.current.showMessages();
     }
   };
+
+  const changeHandler = (e) => {
+    const { value, name } = e.target;
+    setUserDetails({
+      ...userDetails,
+      [name]: value,
+    });
+    value && setHideValidation(false);
+  }
+
+
+
   return (
     <>
       <div className="container-fluid from-c">
@@ -130,11 +138,11 @@ const FormSection = (props) => {
                           })
                         }
                       />
-                      {validator.current.message(
+                      {!hideValidation && validator.current.message(
                         "first_name",
                         userDetails.first_name,
-                        "required|String|max:60",
-                        { className: "text-danger" }
+                        "required|alpha_space|max:60",
+                        { className: "text-danger bg-light p-1 mt-1" }
                       )}
                     </div>
                     <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
@@ -147,18 +155,13 @@ const FormSection = (props) => {
                         aria-describedby="emailHelp"
                         name="last_name"
                         value={userDetails.last_name}
-                        onChange={(e) =>
-                          setUserDetails({
-                            ...userDetails,
-                            [e.target.name]: e.target.value,
-                          })
-                        }
+                        onChange={(e) => changeHandler(e)}
                       />
-                      {validator.current.message(
+                      {!hideValidation && validator.current.message(
                         "last_name",
                         userDetails.last_name,
-                        "required|String|max:60",
-                        { className: "text-danger" }
+                        "required|alpha_space|max:60",
+                        { className: "text-danger bg-light p-1 mt-1" }
                       )}
                     </div>
                   </div>
@@ -180,11 +183,11 @@ const FormSection = (props) => {
                           })
                         }
                       />
-                      {validator.current.message(
+                      {!hideValidation && validator.current.message(
                         "vendor_email",
                         userDetails.vendor_email,
                         "required|email",
-                        { className: "text-danger" }
+                        { className: "text-danger bg-light p-1 mt-1" }
                       )}
                     </div>
                     <div className="mb-4  col-lg-6 col-md-6 col-sm-12">
@@ -203,12 +206,13 @@ const FormSection = (props) => {
                             [e.target.name]: e.target.value,
                           })
                         }
+                        min="0"
                       />
-                      {validator.current.message(
+                      {!hideValidation && validator.current.message(
                         "vendor_phone",
                         userDetails.vendor_phone,
-                        "required|min:10|max:12",
-                        { className: "text-danger" }
+                        "required|min:10|max:10",
+                        { className: "text-danger bg-light p-1 mt-1" }
                       )}
                     </div>
                   </div>
@@ -230,16 +234,16 @@ const FormSection = (props) => {
                           })
                         }
                       />
-                      {validator.current.message(
+                      {!hideValidation && validator.current.message(
                         "first_name",
                         userDetails.business_name,
-                        "required|max:60",
-                        { className: "text-danger" }
+                        "required",
+                        { className: "text-danger bg-light p-1 mt-1" }
                       )}
                     </div>
                     <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
                       <input
-                        type="text"
+                        type="number"
                         className="form-control"
                         autoComplete="off"
                         placeholder="Age"
@@ -254,11 +258,11 @@ const FormSection = (props) => {
                           })
                         }
                       />
-                      {validator.current.message(
+                      {!hideValidation && validator.current.message(
                         "business_age",
                         userDetails.business_age,
                         "required",
-                        { className: "text-danger" }
+                        { className: "text-danger bg-light p-1 mt-1" }
                       )}
                     </div>
 
@@ -277,11 +281,11 @@ const FormSection = (props) => {
                           })
                         }
                       ></textarea>
-                      {validator.current.message(
+                      {!hideValidation && validator.current.message(
                         "message",
                         userDetails.message,
-                        "required|max:250",
-                        { className: "text-danger" }
+                        "required",
+                        { className: "text-danger bg-light p-1 mt-1" }
                       )}
                     </div>
                   </div>

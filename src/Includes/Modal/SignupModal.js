@@ -8,8 +8,10 @@ import Select from "react-select";
 import { getCustomstyle } from "../../Services/helperConst";
 import eventService from "../../Services/eventServices";
 import authServices from "../../Services/authServices";
+import IndexPolicies from "../../Policies/IndexPolicies";
 
 export const SignupModal = ({ closeHandle, openModal, setOpenModal }) => {
+    const history = useHistory();
     const [userDetails, setUserDetails] = useState({
         first_name: "",
         last_name: "",
@@ -35,6 +37,7 @@ export const SignupModal = ({ closeHandle, openModal, setOpenModal }) => {
         market_vendor_password: ""
     });
     const [marketConfirm, setMarketConfirm] = useState();
+    const [showPolicies, setShowPolicies] = useState(false)
 
     const [allCities, setAllCities] = useState([]);
     const [allStates, setAllStates] = useState([]);
@@ -358,599 +361,612 @@ export const SignupModal = ({ closeHandle, openModal, setOpenModal }) => {
 
 
     return (
-        <Modal
-            show={openModal}
-            size="xl"
-            onHide={() => closeHandle()}
-            dialogClassName="modal-100w"
-            aria-labelledby="example-custom-modal-styling-title"
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id="example-custom-modal-styling-title"></Modal.Title>
-                <h2 className="model-heading">Select Business Type</h2>
-            </Modal.Header>
-            <Modal.Body>
-                <div className="container-fluid">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-6 col-sm-12 M-head">
-                            <h4 className="M-f-heading">Service Vendor</h4>
-                            <hr></hr>
-                            <ul className="M-f-ul">
-                                {busineesList &&
-                                    busineesList.map((elm, key) => (
-                                        <li key={key} className={elm.is_active === true ? "active-type" : ""} onClick={() => onSelect(elm, key)}>{elm.label}</li>
-                                    ))}
-                            </ul>
+        <>
+            <Modal
+                show={openModal}
+                size="xl"
+                onHide={() => closeHandle()}
+                dialogClassName="modal-100w"
+                aria-labelledby="example-custom-modal-styling-title"
+            >
+                <Modal.Header closeButton>
+                    <Modal.Title id="example-custom-modal-styling-title"></Modal.Title>
+                    <h2 className="model-heading">Select Business Type</h2>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-lg-6 col-md-6 col-sm-12 M-head">
+                                <h4 className="M-f-heading">Service Vendor</h4>
+                                <hr></hr>
+                                <ul className="M-f-ul">
+                                    {busineesList &&
+                                        busineesList.map((elm, key) => (
+                                            <li key={key} className={elm.is_active === true ? "active-type" : ""} onClick={() => onSelect(elm, key)}>{elm.label}</li>
+                                        ))}
+                                </ul>
+                            </div>
+                            <div className="col-lg-6 col-md-6 col-sm-12 M-head">
+                                <h4 className="M-f-heading">Product Vendor</h4>
+                                <hr className=""></hr>
+                                <ul className="M-f-ul">
+                                    {marketList &&
+                                        marketList.map((elm, key) => (
+                                            <li key={key} className={elm.is_active === true ? "active-type" : ""} onClick={() => onChangeMarket(elm, key)}>{elm.label}</li>
+                                        ))}
+                                </ul>
+                            </div>
                         </div>
-                        <div className="col-lg-6 col-md-6 col-sm-12 M-head">
-                            <h4 className="M-f-heading">Product Vendor</h4>
-                            <hr className=""></hr>
-                            <ul className="M-f-ul">
-                                {marketList &&
-                                    marketList.map((elm, key) => (
-                                        <li key={key} className={elm.is_active === true ? "active-type" : ""} onClick={() => onChangeMarket(elm, key)}>{elm.label}</li>
-                                    ))}
-                            </ul>
-                        </div>
-                    </div>
 
-                    <div className="row">
-                        <div className="col-lg-12">
-                            {/* <span onClick={() => setShow(false)}><FaTimes/></span> */}
-                            {formType.type === "service" ? (
-                                <div className="M-form">
-                                    <h4 className="M-f-heading">Service Vendor</h4>
-                                    <hr></hr>
-                                    <form autocomplete="off" onSubmit={(e) => handleFormSubmit(e, "service")}>
-                                        <div className="row">
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    autoComplete="off"
-                                                    placeholder="First Name"
-                                                    id="fname"
-                                                    aria-describedby="emailHelp"
-                                                    name="first_name"
-                                                    value={userDetails.first_name}
-                                                    onChange={(e) =>
-                                                        setUserDetails({
-                                                            ...userDetails,
-                                                            [e.target.name]: e.target.value,
-                                                        })
-                                                    }
-                                                />
-                                                {validator1.current.message(
-                                                    "first_name",
-                                                    userDetails.first_name,
-                                                    "required|alpha_space|max:60",
-                                                    { className: "text-danger" }
-                                                )}
+                        <div className="row">
+                            <div className="col-lg-12">
+                                {/* <span onClick={() => setShow(false)}><FaTimes/></span> */}
+                                {formType.type === "service" ? (
+                                    <div className="M-form">
+                                        <h4 className="M-f-heading">Service Vendor</h4>
+                                        <hr></hr>
+                                        <form autoComplete="off" onSubmit={(e) => handleFormSubmit(e, "service")}>
+                                            <div className="row">
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        autoComplete="off"
+                                                        placeholder="First Name"
+                                                        id="fname"
+                                                        aria-describedby="emailHelp"
+                                                        name="first_name"
+                                                        value={userDetails.first_name}
+                                                        onChange={(e) =>
+                                                            setUserDetails({
+                                                                ...userDetails,
+                                                                [e.target.name]: e.target.value,
+                                                            })
+                                                        }
+                                                    />
+                                                    {validator1.current.message(
+                                                        "first_name",
+                                                        userDetails.first_name,
+                                                        "required|alpha_space|max:60",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        autoComplete="off"
+                                                        placeholder="Last Name"
+                                                        id="fname"
+                                                        aria-describedby="emailHelp"
+                                                        name="last_name"
+                                                        value={userDetails.last_name}
+                                                        onChange={(e) =>
+                                                            setUserDetails({
+                                                                ...userDetails,
+                                                                [e.target.name]: e.target.value,
+                                                            })
+                                                        }
+                                                    />
+                                                    {validator1.current.message(
+                                                        "last_name",
+                                                        userDetails.last_name,
+                                                        "required|alpha_space|max:60",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
                                             </div>
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    autoComplete="off"
-                                                    placeholder="Last Name"
-                                                    id="fname"
-                                                    aria-describedby="emailHelp"
-                                                    name="last_name"
-                                                    value={userDetails.last_name}
-                                                    onChange={(e) =>
-                                                        setUserDetails({
-                                                            ...userDetails,
-                                                            [e.target.name]: e.target.value,
-                                                        })
-                                                    }
-                                                />
-                                                {validator1.current.message(
-                                                    "last_name",
-                                                    userDetails.last_name,
-                                                    "required|alpha_space|max:60",
-                                                    { className: "text-danger" }
-                                                )}
+                                            <div className="row">
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        autoComplete="off"
+                                                        placeholder="Business Name"
+                                                        id="Business"
+                                                        aria-describedby="emailHelp"
+                                                        name="business_name"
+                                                        value={userDetails.business_name}
+                                                        onChange={(e) =>
+                                                            setUserDetails({
+                                                                ...userDetails,
+                                                                [e.target.name]: e.target.value,
+                                                            })
+                                                        }
+                                                    />
+                                                    {validator1.current.message(
+                                                        "Business Name",
+                                                        userDetails.business_name,
+                                                        "required",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <input
+                                                        type="email"
+                                                        className="form-control"
+                                                        autoComplete="off"
+                                                        placeholder="Email"
+                                                        id="fname"
+                                                        aria-describedby="emailHelp"
+                                                        name="vendor_email"
+                                                        value={userDetails.vendor_email}
+                                                        onChange={(e) =>
+                                                            setUserDetails({
+                                                                ...userDetails,
+                                                                [e.target.name]: e.target.value,
+                                                            })
+                                                        }
+                                                    />
+                                                    {validator1.current.message(
+                                                        "vendor_email",
+                                                        userDetails.vendor_email,
+                                                        "required|email",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    autoComplete="off"
-                                                    placeholder="Business Name"
-                                                    id="Business"
-                                                    aria-describedby="emailHelp"
-                                                    name="business_name"
-                                                    value={userDetails.business_name}
-                                                    onChange={(e) =>
-                                                        setUserDetails({
-                                                            ...userDetails,
-                                                            [e.target.name]: e.target.value,
-                                                        })
-                                                    }
-                                                />
-                                                {validator1.current.message(
-                                                    "Business Name",
-                                                    userDetails.business_name,
-                                                    "required",
-                                                    { className: "text-danger" }
-                                                )}
+                                            <div className="row">
+                                                <div className="mb-4  col-lg-6 col-md-6 col-sm-12">
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        autoComplete="off"
+                                                        placeholder="Phone"
+                                                        id="Phone"
+                                                        aria-describedby="emailHelp"
+                                                        name="vendor_phone"
+                                                        value={userDetails.vendor_phone}
+                                                        onChange={(e) =>
+                                                            setUserDetails({
+                                                                ...userDetails,
+                                                                [e.target.name]: e.target.value,
+                                                            })
+                                                        }
+                                                        min="0"
+                                                    />
+                                                    {validator1.current.message(
+                                                        "vendor_phone",
+                                                        userDetails.vendor_phone,
+                                                        "required|min:10|max:10",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    {/* <select className="form-select form-control"> */}
+                                                    <Select
+                                                        className="custmSelect_lt"
+                                                        placeholder="Select state..."
+                                                        options={allStates}
+                                                        onChange={(e) => productStateHandler(e)}
+                                                        value={userDetails.vendor_state}
+                                                        styles={getCustomstyle(100)}
+                                                    />
+                                                    {validator1.current.message(
+                                                        "state",
+                                                        userDetails.vendor_state,
+                                                        "required",
+                                                        { className: "text-danger mt-2" }
+                                                    )}
+                                                </div>
                                             </div>
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                <input
-                                                    type="email"
-                                                    className="form-control"
-                                                    autoComplete="off"
-                                                    placeholder="Email"
-                                                    id="fname"
-                                                    aria-describedby="emailHelp"
-                                                    name="vendor_email"
-                                                    value={userDetails.vendor_email}
-                                                    onChange={(e) =>
-                                                        setUserDetails({
-                                                            ...userDetails,
-                                                            [e.target.name]: e.target.value,
-                                                        })
-                                                    }
-                                                />
-                                                {validator1.current.message(
-                                                    "vendor_email",
-                                                    userDetails.vendor_email,
-                                                    "required|email",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="mb-4  col-lg-6 col-md-6 col-sm-12">
-                                                <input
-                                                    type="number"
-                                                    className="form-control"
-                                                    autoComplete="off"
-                                                    placeholder="Phone"
-                                                    id="Phone"
-                                                    aria-describedby="emailHelp"
-                                                    name="vendor_phone"
-                                                    value={userDetails.vendor_phone}
-                                                    onChange={(e) =>
-                                                        setUserDetails({
-                                                            ...userDetails,
-                                                            [e.target.name]: e.target.value,
-                                                        })
-                                                    }
-                                                    min="0"
-                                                />
-                                                {validator1.current.message(
-                                                    "vendor_phone",
-                                                    userDetails.vendor_phone,
-                                                    "required|min:10",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                {/* <select className="form-select form-control"> */}
-                                                <Select
-                                                    className="custmSelect_lt"
-                                                    placeholder="Select state..."
-                                                    options={allStates}
-                                                    onChange={(e) => productStateHandler(e)}
-                                                    value={userDetails.vendor_state}
-                                                    styles={getCustomstyle(100)}
-                                                />
-                                                {validator1.current.message(
-                                                    "state",
-                                                    userDetails.vendor_state,
-                                                    "required",
-                                                    { className: "text-danger mt-2" }
-                                                )}
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="mb-4  col-lg-6 col-md-6 col-sm-12">
-                                                {/* <select className="form-select form-control"> */}
-                                                <Select
-                                                    className="custmSelect_lt"
-                                                    placeholder="Select City"
-                                                    styles={getCustomstyle(100)}
-                                                    onChange={(e) =>
-                                                        setUserDetails({
-                                                            ...userDetails,
-                                                            vendor_city: e,
-                                                        })
-                                                    }
-                                                    value={userDetails.vendor_city}
-                                                    options={allCities}
-                                                />
-                                                {validator1.current.message(
-                                                    "Select City",
-                                                    userDetails.vendor_city,
-                                                    "required",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                {/* <select className="form-select form-control"> */}
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    autoComplete="off"
-                                                    placeholder="Surrounding Area"
-                                                    name="business_type"
-                                                    value={userDetails.surrounding_area}
-                                                    onChange={(e) =>
-                                                        setUserDetails({
-                                                            ...userDetails,
-                                                            surrounding_area: e.target.value,
-                                                        })
-                                                    }
-                                                />
-                                                {validator1.current.message(
-                                                    "Area",
-                                                    userDetails.surrounding_area,
-                                                    "required",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-
-                                        </div>
-                                        <div className="row">
-
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                {/* <select className="form-select form-control"> */}
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    autoComplete="off"
-                                                    placeholder="business_type"
-                                                    id="business_type"
-                                                    aria-describedby="business_type"
-                                                    name="business_type"
-                                                    value={userDetails.business_type.label}
-                                                    readOnly
-                                                />
-                                                {validator1.current.message(
-                                                    "Select bussiness",
-                                                    userDetails.business_type,
-                                                    "required",
-                                                    { className: "text-danger" }
-                                                )}
+                                            <div className="row">
+                                                <div className="mb-4  col-lg-6 col-md-6 col-sm-12">
+                                                    {/* <select className="form-select form-control"> */}
+                                                    <Select
+                                                        className="custmSelect_lt"
+                                                        placeholder="Select City"
+                                                        styles={getCustomstyle(100)}
+                                                        onChange={(e) =>
+                                                            setUserDetails({
+                                                                ...userDetails,
+                                                                vendor_city: e,
+                                                            })
+                                                        }
+                                                        value={userDetails.vendor_city}
+                                                        options={allCities}
+                                                    />
+                                                    {validator1.current.message(
+                                                        "Select City",
+                                                        userDetails.vendor_city,
+                                                        "required",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    {/* <select className="form-select form-control"> */}
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        autoComplete="off"
+                                                        placeholder="Surrounding Area"
+                                                        name="business_type"
+                                                        value={userDetails.surrounding_area}
+                                                        onChange={(e) =>
+                                                            setUserDetails({
+                                                                ...userDetails,
+                                                                surrounding_area: e.target.value,
+                                                            })
+                                                        }
+                                                    />
+                                                    {validator1.current.message(
+                                                        "Area",
+                                                        userDetails.surrounding_area,
+                                                        "required",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
 
                                             </div>
+                                            <div className="row">
 
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                <Select
-                                                    className="custmSelect_lt"
-                                                    placeholder="Select Services"
-                                                    styles={getCustomstyle(100)}
-                                                    onChange={(e) =>
-                                                        setUserDetails({
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    {/* <select className="form-select form-control"> */}
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        autoComplete="off"
+                                                        placeholder="business_type"
+                                                        id="business_type"
+                                                        aria-describedby="business_type"
+                                                        name="business_type"
+                                                        value={userDetails.business_type.label}
+                                                        readOnly
+                                                    />
+                                                    {validator1.current.message(
+                                                        "Select bussiness",
+                                                        userDetails.business_type,
+                                                        "required",
+                                                        { className: "text-danger" }
+                                                    )}
+
+                                                </div>
+
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <Select
+                                                        className="custmSelect_lt"
+                                                        placeholder="Select Services"
+                                                        styles={getCustomstyle(100)}
+                                                        onChange={(e) =>
+                                                            setUserDetails({
+                                                                ...userDetails,
+                                                                vendor_service: e.value,
+                                                            })
+                                                        }
+                                                        options={ServiceList}
+                                                    />
+                                                    {validator1.current.message(
+                                                        "Select Services",
+                                                        userDetails.vendor_service,
+                                                        "required",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            <div className="row">
+                                                <div className="mb-4 col-6">
+                                                    <input type="password" className="form-control" id="pwd" placeholder="password" name="pswd"
+                                                        onChange={(e) => setUserDetails({
                                                             ...userDetails,
-                                                            vendor_service: e.value,
-                                                        })
-                                                    }
-                                                    options={ServiceList}
-                                                />
-                                                {validator1.current.message(
-                                                    "Select Services",
-                                                    userDetails.vendor_service,
-                                                    "required",
-                                                    { className: "text-danger" }
-                                                )}
+                                                            vendor_password: e.target.value
+                                                        })}
+                                                    />
+                                                    {validator1.current.message(
+                                                        "Password",
+                                                        userDetails.vendor_password,
+                                                        "required",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                                <div className="mb-4 col-6">
+                                                    <input type="password" className="form-control" id="pwd" placeholder="confirm-password" name="pswd" onChange={(e) => setVendorConfirm(e.target.value)}
+                                                    />
+                                                    {validator1.current.message(
+                                                        "Confirm Password",
+                                                        vendorConfirm,
+                                                        `required|in:${userDetails.vendor_password}`,
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
                                             </div>
-                                        </div>
-
-                                        <div className="row">
-                                            <div className="mb-4 col-6">
-                                                <input type="password" class="form-control" id="pwd" placeholder="password" name="pswd"
-                                                    onChange={(e) => setUserDetails({
-                                                        ...userDetails,
-                                                        vendor_password: e.target.value
-                                                    })}
-                                                />
-                                                {validator1.current.message(
-                                                    "Password",
-                                                    userDetails.vendor_password,
-                                                    "required",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                            <div className="mb-4 col-6">
-                                                <input type="password" class="form-control" id="pwd" placeholder="confirm-password" name="pswd" onChange={(e) => setVendorConfirm(e.target.value)}
-                                                />
-                                                {validator1.current.message(
-                                                    "Confirm Password",
-                                                    vendorConfirm,
-                                                    `required|in:${userDetails.vendor_password}`,
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                        </div>
 
 
-                                        <p>
-                                            By clicking the submit button below you are accepting
-                                            <Link to="/policies" className="m-term">
+                                            <p>
+                                                By clicking the submit button below you are accepting
+                                                {/* <Link to="/policies" className="m-term">
                                                 Terms and Conditions
-                                            </Link>
-                                        </p>
+                                            </Link> */}
+                                                <a href="javascript:void(0)" onClick={() => setShowPolicies(true)}>
+                                                    &nbsp; Terms and Conditions
+                                                </a>
+                                            </p>
 
-                                        <button
-                                            type="submit"
-                                            className=" Mform-btn"
-                                        >
-                                            Submit
-                                        </button>
-                                    </form>
-                                </div>
-                            ) : formType.type === "market" ? (
-                                <div className="M-form">
-                                    <h4 className="M-f-heading">Market Vendor</h4>
-                                    <hr></hr>
-                                    <form autoComplete="off" onSubmit={(e) => handleMarketSubmit(e, "product")}>
-                                        <div className="row">
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
+                                            <button
+                                                type="submit"
+                                                className=" Mform-btn"
+                                            >
+                                                Submit
+                                            </button>
+                                        </form>
+                                    </div>
+                                ) : formType.type === "market" ? (
+                                    <div className="M-form">
+                                        <h4 className="M-f-heading">Market Vendor</h4>
+                                        <hr></hr>
+                                        <form autoComplete="off" onSubmit={(e) => handleMarketSubmit(e, "product")}>
+                                            <div className="row">
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
 
-                                                    autocomplete="new-password"
-                                                    placeholder="First Name"
-                                                    id="fname"
-                                                    aria-describedby="emailHelp"
-                                                    name="first_name"
-                                                    value={marketVendorDetails.first_name}
-                                                    onChange={(e) =>
-                                                        setMarketVendor({
+                                                        autoComplete="new-password"
+                                                        placeholder="First Name"
+                                                        id="fname"
+                                                        aria-describedby="emailHelp"
+                                                        name="first_name"
+                                                        value={marketVendorDetails.first_name}
+                                                        onChange={(e) =>
+                                                            setMarketVendor({
+                                                                ...marketVendorDetails,
+                                                                [e.target.name]: e.target.value,
+                                                            })
+                                                        }
+                                                    />
+                                                    {validator2.current.message(
+                                                        "first_name",
+                                                        marketVendorDetails.first_name,
+                                                        "required|alpha_space|max:60",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        autoComplete="new-password"
+                                                        placeholder="Last Name"
+                                                        id="fname"
+                                                        aria-describedby="emailHelp"
+                                                        name="last_name"
+                                                        value={marketVendorDetails.last_name}
+                                                        onChange={(e) =>
+                                                            setMarketVendor({
+                                                                ...marketVendorDetails,
+                                                                [e.target.name]: e.target.value,
+                                                            })
+                                                        }
+                                                    />
+                                                    {validator2.current.message(
+                                                        "last_name",
+                                                        marketVendorDetails.last_name,
+                                                        "required|alpha_space|max:60",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        autoComplete="new-password"
+                                                        placeholder="Business Name"
+                                                        id="Business"
+                                                        aria-describedby="emailHelp"
+                                                        name="market_business_name"
+                                                        value={marketVendorDetails.market_business_name}
+                                                        onChange={(e) =>
+                                                            setMarketVendor({
+                                                                ...marketVendorDetails,
+                                                                [e.target.name]: e.target.value,
+                                                            })
+                                                        }
+                                                    />
+                                                    {validator2.current.message(
+                                                        "required|max:60",
+                                                        marketVendorDetails.market_business_name,
+                                                        "required",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    <input
+                                                        type="email"
+                                                        className="form-control"
+                                                        autoComplete="new-password"
+                                                        placeholder="Email"
+                                                        id="fname"
+                                                        aria-describedby="emailHelp"
+                                                        name="market_email"
+                                                        value={marketVendorDetails.market_email}
+                                                        onChange={(e) =>
+                                                            setMarketVendor({
+                                                                ...marketVendorDetails,
+                                                                [e.target.name]: e.target.value,
+                                                            })
+                                                        }
+                                                    />
+                                                    {validator2.current.message(
+                                                        "vendor_email",
+                                                        marketVendorDetails.market_email,
+                                                        "required|email",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="mb-4  col-lg-6 col-md-6 col-sm-12">
+                                                    <input
+                                                        type="number"
+                                                        className="form-control"
+                                                        autoComplete="new-password"
+                                                        placeholder="Phone"
+                                                        id="Phone"
+                                                        aria-describedby="emailHelp"
+                                                        name="market_phone"
+                                                        value={marketVendorDetails.market_phone}
+                                                        onChange={(e) =>
+                                                            setMarketVendor({
+                                                                ...marketVendorDetails,
+                                                                [e.target.name]: e.target.value,
+                                                            })
+                                                        }
+                                                        min="0"
+                                                    />
+                                                    {validator2.current.message(
+                                                        "market_phone",
+                                                        marketVendorDetails.market_phone,
+                                                        "required|min:10|max:10",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    {/* <select className="form-select form-control"> */}
+                                                    <Select
+                                                        className="custmSelect_lt"
+                                                        placeholder="Select state..."
+                                                        options={allStates}
+                                                        onChange={(e) => serviceStateHandler(e)}
+                                                        value={marketVendorDetails.market_state}
+                                                        styles={getCustomstyle(100)}
+                                                    />
+                                                    {validator2.current.message(
+                                                        "state",
+                                                        marketVendorDetails.market_state,
+                                                        "required",
+                                                        { className: "text-danger mt-2" }
+                                                    )}
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    {/* <select className="form-select form-control"> */}
+                                                    <Select
+                                                        className="custmSelect_lt"
+                                                        placeholder="Select City"
+                                                        styles={getCustomstyle(100)}
+                                                        onChange={(e) =>
+                                                            setMarketVendor({
+                                                                ...marketVendorDetails,
+                                                                market_city: e,
+                                                            })
+                                                        }
+                                                        value={marketVendorDetails.market_city}
+                                                        options={allCities}
+                                                    />
+                                                    {validator2.current.message(
+                                                        "Select City",
+                                                        marketVendorDetails.market_city,
+                                                        "required",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    {/* <select className="form-select form-control"> */}
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        autoComplete="off"
+                                                        placeholder="Surrounding Area"
+                                                        name="business_type"
+                                                        value={marketVendorDetails.surrounding_area}
+                                                        onChange={(e) =>
+                                                            setMarketVendor({
+                                                                ...marketVendorDetails,
+                                                                surrounding_area: e.target.value,
+                                                            })
+                                                        }
+                                                    />
+                                                    {validator2.current.message(
+                                                        "Area",
+                                                        marketVendorDetails.surrounding_area,
+                                                        "required",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+
+
+                                            </div>
+
+
+
+                                            <div className="row">
+                                                <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
+                                                    {/* <select className="form-select form-control"> */}
+                                                    <input
+                                                        type="text"
+                                                        className="form-control"
+                                                        autoComplete="new-password"
+                                                        placeholder="business_type"
+                                                        id="business_type"
+                                                        aria-describedby="business_type"
+                                                        name="business_type"
+                                                        value={marketVendorDetails.market_business_type.label}
+                                                        disabled
+                                                    />
+                                                </div>
+                                                <div className="mb-4 col-6">
+                                                    <input type="password" className="form-control" id="pwd" placeholder="password" name="pswd"
+                                                        onChange={(e) => setMarketVendor({
                                                             ...marketVendorDetails,
-                                                            [e.target.name]: e.target.value,
-                                                        })
-                                                    }
-                                                />
-                                                {validator2.current.message(
-                                                    "first_name",
-                                                    marketVendorDetails.first_name,
-                                                    "required|alpha_space|max:60",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    autocomplete="new-password"
-                                                    placeholder="Last Name"
-                                                    id="fname"
-                                                    aria-describedby="emailHelp"
-                                                    name="last_name"
-                                                    value={marketVendorDetails.last_name}
-                                                    onChange={(e) =>
-                                                        setMarketVendor({
-                                                            ...marketVendorDetails,
-                                                            [e.target.name]: e.target.value,
-                                                        })
-                                                    }
-                                                />
-                                                {validator2.current.message(
-                                                    "last_name",
-                                                    marketVendorDetails.last_name,
-                                                    "required|alpha_space|max:60",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    autocomplete="new-password"
-                                                    placeholder="Business Name"
-                                                    id="Business"
-                                                    aria-describedby="emailHelp"
-                                                    name="market_business_name"
-                                                    value={marketVendorDetails.market_business_name}
-                                                    onChange={(e) =>
-                                                        setMarketVendor({
-                                                            ...marketVendorDetails,
-                                                            [e.target.name]: e.target.value,
-                                                        })
-                                                    }
-                                                />
-                                                {validator2.current.message(
-                                                    "required|max:60",
-                                                    marketVendorDetails.market_business_name,
-                                                    "required",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                <input
-                                                    type="email"
-                                                    className="form-control"
-                                                    autocomplete="new-password"
-                                                    placeholder="Email"
-                                                    id="fname"
-                                                    aria-describedby="emailHelp"
-                                                    name="market_email"
-                                                    value={marketVendorDetails.market_email}
-                                                    onChange={(e) =>
-                                                        setMarketVendor({
-                                                            ...marketVendorDetails,
-                                                            [e.target.name]: e.target.value,
-                                                        })
-                                                    }
-                                                />
-                                                {validator2.current.message(
-                                                    "vendor_email",
-                                                    marketVendorDetails.market_email,
-                                                    "required|email",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="mb-4  col-lg-6 col-md-6 col-sm-12">
-                                                <input
-                                                    type="number"
-                                                    className="form-control"
-                                                    autocomplete="new-password"
-                                                    placeholder="Phone"
-                                                    id="Phone"
-                                                    aria-describedby="emailHelp"
-                                                    name="market_phone"
-                                                    value={marketVendorDetails.market_phone}
-                                                    onChange={(e) =>
-                                                        setMarketVendor({
-                                                            ...marketVendorDetails,
-                                                            [e.target.name]: e.target.value,
-                                                        })
-                                                    }
-                                                    min="0"
-                                                />
-                                                {validator2.current.message(
-                                                    "market_phone",
-                                                    marketVendorDetails.market_phone,
-                                                    "required|min:10",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                {/* <select className="form-select form-control"> */}
-                                                <Select
-                                                    className="custmSelect_lt"
-                                                    placeholder="Select state..."
-                                                    options={allStates}
-                                                    onChange={(e) => serviceStateHandler(e)}
-                                                    value={marketVendorDetails.market_state}
-                                                    styles={getCustomstyle(100)}
-                                                />
-                                                {validator2.current.message(
-                                                    "state",
-                                                    marketVendorDetails.market_state,
-                                                    "required",
-                                                    { className: "text-danger mt-2" }
-                                                )}
-                                            </div>
-                                        </div>
-                                        <div className="row">
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                {/* <select className="form-select form-control"> */}
-                                                <Select
-                                                    className="custmSelect_lt"
-                                                    placeholder="Select City"
-                                                    styles={getCustomstyle(100)}
-                                                    onChange={(e) =>
-                                                        setMarketVendor({
-                                                            ...marketVendorDetails,
-                                                            market_city: e,
-                                                        })
-                                                    }
-                                                    value={marketVendorDetails.market_city}
-                                                    options={allCities}
-                                                />
-                                                {validator2.current.message(
-                                                    "Select City",
-                                                    marketVendorDetails.market_city,
-                                                    "required",
-                                                    { className: "text-danger" }
-                                                )}
+                                                            market_vendor_password: e.target.value
+                                                        })}
+                                                        autoComplete="new-password"
+                                                    />
+                                                    {validator2.current.message(
+                                                        "Password",
+                                                        marketVendorDetails.market_vendor_password,
+                                                        "required",
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
+
+                                                <div className="mb-4 col-6">
+                                                    <input type="password" className="form-control" id="pwd" placeholder="confirm-password" name="pswd" onChange={(e) => setMarketConfirm(e.target.value)}
+                                                        autoComplete="new-password" />
+                                                    {validator2.current.message(
+                                                        "Password",
+                                                        marketConfirm,
+                                                        `required|in:${marketVendorDetails.market_vendor_password}`,
+                                                        { className: "text-danger" }
+                                                    )}
+                                                </div>
                                             </div>
 
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                {/* <select className="form-select form-control"> */}
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    autoComplete="off"
-                                                    placeholder="Surrounding Area"
-                                                    name="business_type"
-                                                    value={marketVendorDetails.surrounding_area}
-                                                    onChange={(e) =>
-                                                        setMarketVendor({
-                                                            ...marketVendorDetails,
-                                                            surrounding_area: e.target.value,
-                                                        })
-                                                    }
-                                                />
-                                                {validator2.current.message(
-                                                    "Area",
-                                                    marketVendorDetails.surrounding_area,
-                                                    "required",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
+                                            <p>
+                                                By clicking the submit button below you are accepting
 
+                                                <a href="javascript:void(0)" onClick={() => setShowPolicies(true)}>
+                                                    &nbsp; Terms and Conditions
+                                                </a>
+                                                {/* <Link to="/policies" className="m-term">&nbsp; Terms and Conditions</Link> */}
 
-                                        </div>
+                                            </p>
 
-
-
-                                        <div className="row">
-                                            <div className="mb-4 col-lg-6 col-md-6 col-sm-12">
-                                                {/* <select className="form-select form-control"> */}
-                                                <input
-                                                    type="text"
-                                                    className="form-control"
-                                                    autocomplete="new-password"
-                                                    placeholder="business_type"
-                                                    id="business_type"
-                                                    aria-describedby="business_type"
-                                                    name="business_type"
-                                                    value={marketVendorDetails.market_business_type.label}
-                                                    disabled
-                                                />
-                                            </div>
-                                            <div className="mb-4 col-6">
-                                                <input type="password" class="form-control" id="pwd" placeholder="password" name="pswd"
-                                                    onChange={(e) => setMarketVendor({
-                                                        ...marketVendorDetails,
-                                                        market_vendor_password: e.target.value
-                                                    })}
-                                                    autocomplete="new-password"
-                                                />
-                                                {validator2.current.message(
-                                                    "Password",
-                                                    marketVendorDetails.market_vendor_password,
-                                                    "required",
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-
-                                            <div className="mb-4 col-6">
-                                                <input type="password" class="form-control" id="pwd" placeholder="confirm-password" name="pswd" onChange={(e) => setMarketConfirm(e.target.value)}
-                                                    autocomplete="new-password" />
-                                                {validator2.current.message(
-                                                    "Password",
-                                                    marketConfirm,
-                                                    `required|in:${marketVendorDetails.market_vendor_password}`,
-                                                    { className: "text-danger" }
-                                                )}
-                                            </div>
-                                        </div>
-
-                                        <p>
-                                            By clicking the submit button below you are accepting
-                                            <Link to="/policies" className="m-term">
-                                                &nbsp; Terms and Conditions
-                                            </Link>
-                                        </p>
-
-                                        <button
-                                            type="submit"
-                                            className=" Mform-btn"
-                                        >
-                                            Submit
-                                        </button>
-                                    </form>
-                                </div>
-                            ) : (
-                                ""
-                            )}
+                                            <button
+                                                type="submit"
+                                                className=" Mform-btn"
+                                            >
+                                                Submit
+                                            </button>
+                                        </form>
+                                    </div>
+                                ) : (
+                                    ""
+                                )}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </Modal.Body>
-        </Modal>
+                </Modal.Body>
+            </Modal>
+
+            <IndexPolicies
+                show={showPolicies}
+                close={setShowPolicies}
+            />
+        </>
     );
 };

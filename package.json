@@ -1,6 +1,6 @@
 {
   "name": "VendorWeb",
-  "homepage": "/vendorweb",
+  "homepage": "/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
